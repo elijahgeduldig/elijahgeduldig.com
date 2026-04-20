@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elijah Geduldig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --dark-green: #1a3a2a;
+  --mid-green: #2d5a3d;
+  --warm-red: #8b2424;
+  --deep-red: #7a1f1f;
+  --text-dark: #1c1c1c;
+  --text-mid: #3a3a3a;
+  --text-light: #6a6a6a;
+  --card-bg: #ede8df;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+html, body { height: 100%; overflow: hidden; }
+body { background: #000; color: var(--text-dark); font-family: 'DM Sans', sans-serif; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 48px;
+  background: rgba(26,58,42,0.72);
+  transition: background 0.4s ease, border-color 0.4s ease;
+  min-height: 65px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 24px;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.1rem; color: rgba(255,255,255,0.9);
+  text-decoration: none; cursor: pointer; transition: color 0.2s;
+  flex-shrink: 0;
+}
+.nav-logo:hover { color: #ffffff; }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.8);
+  text-decoration: none; letter-spacing: 0.06em; cursor: pointer;
+  position: relative; padding-bottom: 3px; transition: color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1.5px; background: rgba(255,255,255,0.9);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+}
+.nav-links a:hover { color: #ffffff; }
+.nav-links a.active { color: #ffffff; }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* ── SLIDER ── */
+.slider-viewport { position: fixed; top: 65px; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 2; }
+.slider-track {
+  display: flex; width: 400%; height: 100%;
+  transition: transform 0.65s cubic-bezier(0.77,0,0.175,1); will-change: transform;
+}
+.slide-panel {
+  width: 25%; height: 100%;
+  overflow-y: auto; overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; flex-shrink: 0;
+  scroll-behavior: smooth;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.img-placeholder {
+  background: var(--card-bg); border: 1.5px dashed rgba(26,58,42,0.2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; color: var(--text-light); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.1em; text-align: center; line-height: 1.6;
+}
+.img-placeholder code {
+  display: block; font-size: 9px; color: rgba(26,58,42,0.3);
+  letter-spacing: 0; text-transform: none; margin-top: 2px; font-family: monospace;
+}
+
+/* ── PANEL 0: HOME ── */
+.home-slide { position: relative; height: 100%; overflow: hidden; }
+.home-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: brightness(0.88);
+  z-index: 0;
+  will-change: transform;
+}
+.home-inner {
+  position: relative; z-index: 2;
+  padding: 0 72px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+}
+.home-left { display: flex; align-items: flex-end; padding-bottom: 80px; }
+.home-headline {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(3rem, 5.5vw, 5.5rem); line-height: 1.08;
+  color: #f5f0e8; font-weight: 400;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5), 0 3px 32px rgba(0,0,0,0.35);
+  opacity: 1 !important; will-change: transform;
+}
+.home-footer-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 72px 28px;
+  margin: 0 -72px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+  opacity: 1 !important;
+}
+.home-footer-year { font-size: 11px; color: rgba(255,255,255,0.65); font-family: 'Lora', serif; }
+.home-footer-links { display: flex; gap: 24px; }
+.home-footer-links a, .home-footer-links span {
+  font-size: 11px; color: rgba(255,255,255,0.9);
+  text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em;
+  font-family: 'Lora', serif;
+}
+.home-footer-links a:hover, .home-footer-links span:hover { color: #ffffff; }
+.home-photo-placeholder { width: 280px; height: 380px; align-self: center; }
+
+/* ── PANEL 1: RESEARCHER ── */
+.rp { font-family: 'Georgia', serif; background: var(--cream); padding: 0 0 80px; }
+.rp-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.slide-panel:not(:first-child) { background: var(--cream); }
+
+.researcher-hero {
+  position: relative;
+  height: calc(100vh - 65px - 80px);
+  margin-bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.researcher-hero-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.78);
+  z-index: 0;
+  will-change: transform;
+}
+.researcher-hero-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+  z-index: 1;
+  will-change: opacity;
+}
+.researcher-hero-content {
+  position: relative; z-index: 2;
+  padding: 0 48px 52px;
+  isolation: isolate;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+.researcher-hero-kicker {
+  font-size: 15px; text-transform: uppercase; letter-spacing: 0.2em;
+  color: #ffffff; margin-bottom: 8px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6), 0 2px 24px rgba(0,0,0,0.4);
+  -webkit-transform: translate3d(0,0,0);
+}
+.researcher-hero-kicker-minor {
+  font-size: 15px; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.9); margin-bottom: 20px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6), 0 2px 24px rgba(0,0,0,0.4);
+  -webkit-transform: translate3d(0,0,0);
+}
+.researcher-hero-headline {
+  font-style: italic; font-size: clamp(36px, 5.5vw, 58px);
+  color: #ffffff; font-weight: 400; line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 4px 40px rgba(0,0,0,0.45);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.researcher-cred-peek {
+  background: var(--cream);
+  padding: 40px 48px 0;
+  margin-bottom: 0;
+}
+.opening {
+  padding: 72px 0 60px; border-bottom: 1px solid rgba(26,58,42,0.12); margin-bottom: 64px;
+  display: grid; grid-template-columns: 1fr 200px; gap: 48px; align-items: center;
+}
+.opening-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-light); margin-bottom: 8px; }
+.opening-kicker-minor { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-light); margin-bottom: 24px; opacity: 0.6; }
+.opening-headline { font-style: italic; font-size: clamp(28px,4vw,40px); color: var(--dark-green); font-weight: 400; line-height: 1.15; }
+.opening-photo-placeholder { width: 200px; height: 250px; }
+
+.cred-strip { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; margin-bottom: 72px; border: 1px solid rgba(26,58,42,0.12); }
+.cred-item { padding: 32px 24px; text-align: center; }
+.cred-divider { background: rgba(26,58,42,0.12); }
+.cred-number { font-style: italic; font-size: 52px; color: var(--dark-green); font-weight: 400; line-height: 1; margin-bottom: 10px; }
+.cred-label { font-style: italic; font-size: 14px; color: var(--text-dark); margin-bottom: 7px; }
+.cred-explain { font-size: 10px; color: var(--text-light); line-height: 1.6; text-transform: uppercase; letter-spacing: 0.08em; }
+
+.section-rule { display: flex; align-items: center; gap: 16px; margin-bottom: 44px; }
+.section-rule-line { flex: 1; height: 1px; background: rgba(26,58,42,0.12); }
+.section-rule-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-light); white-space: nowrap; }
+
+.thesis-feature { display: grid; grid-template-columns: 1fr 480px; margin-bottom: 72px; border: 1px solid rgba(26,58,42,0.12); }
+.thesis-body { padding: 40px 36px; border-right: 1px solid rgba(26,58,42,0.12); }
+.thesis-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--warm-red); margin-bottom: 16px; }
+.thesis-headline { font-style: italic; font-size: clamp(18px,2.4vw,24px); color: var(--dark-green); font-weight: 400; line-height: 1.38; margin-bottom: 20px; }
+.thesis-body p { font-size: 15px; line-height: 1.82; color: var(--text-mid); margin-bottom: 20px; }
+.tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.tag { padding: 5px 14px; border: 1px solid rgba(26,58,42,0.2); font-size: 12px; color: var(--text-mid); letter-spacing: 0.05em; }
+.btn-red { display: inline-block; background: var(--warm-red); color: white; padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; text-decoration: none; border: none; cursor: pointer; font-family: inherit; text-transform: uppercase; }
+.btn-red:hover { background: var(--deep-red); }
+
+.thesis-aside { background: var(--dark-green); display: flex; flex-direction: column; }
+.thesis-aside-photo { flex: 1; min-height: 200px; }
+.thesis-aside-photo .img-placeholder { height: 100%; min-height: 200px; background: rgba(255,255,255,0.04); border: 1.5px dashed rgba(245,240,232,0.15); color: rgba(245,240,232,0.3); }
+.thesis-aside-photo .img-placeholder code { color: rgba(245,240,232,0.2); }
+.thesis-aside-meta { padding: 28px 22px; display: flex; flex-direction: column; gap: 18px; }
+.aside-stat { text-align: center; padding-bottom: 18px; border-bottom: 1px solid rgba(245,240,232,0.1); }
+.aside-big-num { font-style: italic; font-size: 52px; color: rgba(245,240,232,0.9); line-height: 1; margin-bottom: 5px; }
+.aside-num-label { font-size: 10px; color: rgba(245,240,232,0.4); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.6; }
+.aside-award-tag { font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(245,240,232,0.3); margin-bottom: 6px; }
+.aside-award-name { font-style: italic; font-size: 13px; color: rgba(245,240,232,0.8); line-height: 1.45; }
+.aside-award-sub { font-size: 12px; color: rgba(245,240,232,0.4); margin-top: 3px; line-height: 1.5; }
+
+.roles-section { margin-bottom: 72px; display: flex; flex-direction: column; gap: 2px; }
+.role-block { display: grid; grid-template-columns: 2fr 3fr; min-height: 260px; border: 1px solid rgba(26,58,42,0.1); }
+.role-block.flip { direction: rtl; }
+.role-block.flip > * { direction: ltr; }
+.role-block img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; min-height: 220px; }
+@media (max-width: 700px) {
+  .role-block { grid-template-columns: 1fr !important; direction: ltr !important; }
+  .role-block.flip { direction: ltr !important; }
+  .role-block > a, .role-block > div.role-img { order: -1; height: 220px; min-height: 220px; }
+  .role-block img { height: 220px; min-height: 220px; }
+  .role-text { padding: 32px 28px; order: 1; }
+  .thesis-feature { grid-template-columns: 1fr; }
+  .thesis-aside { order: -1; min-height: 280px; }
+  .thesis-body { order: 1; }
+}
+.role-block--narrow { grid-template-columns: 1fr 3fr; }
+.role-img { background: var(--card-bg); border: 1.5px dashed rgba(26,58,42,0.18); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
+.role-img code { display: block; font-size: 9px; color: rgba(26,58,42,0.28); letter-spacing: 0; text-transform: none; margin-top: 2px; font-family: monospace; }
+.role-img.dark-bg { background: var(--dark-green); border: none; }
+.role-img.dark-bg svg { opacity: 0.2; color: var(--cream); }
+.role-img.dark-bg span { color: rgba(245,240,232,0.3); }
+.role-img.dark-bg code { color: rgba(245,240,232,0.2); }
+.role-text { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; background: var(--cream); }
+.role-year-badge { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 8px; }
+.role-badge { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--warm-red); font-weight: 500; margin-bottom: 10px; }
+.role-org { font-style: italic; font-size: clamp(18px,2.2vw,24px); color: var(--dark-green); line-height: 1.25; margin-bottom: 16px; font-weight: 400; }
+.role-desc { font-size: 15px; line-height: 1.8; color: var(--text-mid); }
+.role-divider { width: 32px; height: 1px; background: rgba(26,58,42,0.15); margin: 18px 0; }
+
+.papers-list { display: flex; flex-direction: column; margin-bottom: 60px; }
+.paper-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(26,58,42,0.1);
+}
+.paper-row:first-child { border-top: 1px solid rgba(26,58,42,0.1); }
+.paper-row-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--warm-red); margin-bottom: 10px; }
+.paper-row-title { font-style: italic; font-size: clamp(18px, 2vw, 24px); color: var(--dark-green); line-height: 1.3; font-weight: 400; }
+.paper-row-desc { font-size: 15px; line-height: 1.75; color: var(--text-mid); margin-bottom: 20px; }
+.paper-row-link {
+  display: inline-block; font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--warm-red); text-decoration: none;
+  border-bottom: 1px solid rgba(139,36,36,0.3); padding-bottom: 2px;
+}
+.paper-row-link:hover { border-bottom-color: var(--warm-red); }
+@media (max-width: 700px) {
+  .paper-row { grid-template-columns: 1fr; gap: 12px; }
+  .thesis-feature { grid-template-columns: 1fr; }
+  .thesis-aside { min-height: 280px; }
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 0.75rem; }
+}
+
+.page-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(26,58,42,0.12); font-size: 11px; color: var(--text-light); }
+.page-footer-links { display: flex; gap: 24px; }
+.page-footer-links a { color: var(--text-dark); text-decoration: none; }
+.page-footer-links a:hover { color: var(--warm-red); }
+
+/* ── PANEL 2: PEOPLE HELPER ── */
+.people-panel-inner { background: var(--dark-green); color: var(--cream); min-height: 100%; padding: 60px 48px 100px; }
+.people-divider { width: 36px; height: 2px; background: rgba(245,240,232,0.3); margin-bottom: 20px; }
+.people-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(2.2rem,3.5vw,3rem); color: var(--cream); font-weight: 400; margin-bottom: 16px; }
+.people-desc { font-family: 'Lora', serif; font-style: italic; font-size: 1.1rem; line-height: 1.7; color: rgba(245,240,232,0.75); max-width: 600px; margin-bottom: 48px; }
+.people-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.people-card { background: rgba(255,255,255,0.05); padding: 32px 28px; border: 1px solid rgba(245,240,232,0.1); }
+.people-card-icon { font-size: 1.8rem; margin-bottom: 16px; }
+.people-card-title { font-family: 'Lora', serif; font-style: italic; font-size: 1rem; color: rgba(245,240,232,0.9); margin-bottom: 10px; font-weight: 400; }
+.people-card-desc { font-size: 0.83rem; line-height: 1.7; color: rgba(245,240,232,0.55); }
+
+/* ── PANEL 3: MUSICIAN ── */
+.musician-panel-inner { min-height: 100%; padding: 60px 48px 100px; max-width: 1100px; margin: 0 auto; }
+.musician-divider { width: 36px; height: 2px; background: var(--warm-red); margin-bottom: 28px; }
+.musician-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.musician-h2 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(2rem,3vw,2.8rem); color: var(--dark-green); font-weight: 400; margin-bottom: 24px; }
+.musician-p { font-size: 0.9rem; line-height: 1.8; color: var(--text-mid); margin-bottom: 16px; }
+.musician-links { display: flex; gap: 16px; margin-top: 28px; }
+.music-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.music-card { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+.music-card:nth-child(1) { background: var(--dark-green); }
+.music-card:nth-child(2) { background: var(--card-bg); }
+.music-card:nth-child(3) { background: var(--card-bg); }
+.music-card:nth-child(4) { background: var(--warm-red); }
+
+@keyframes bounceChevron {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(7px); opacity: 0.4; }
+}
+.bounce-chevron {
+  font-size: 1.4rem; color: rgba(245,240,232,0.6); line-height: 1;
+  display: block; user-select: none;
+}
+
+/* ── MUSICIAN PANEL: viz canvas uses mix-blend-mode:multiply over content ── */
+
+/* ── LISTENING MODE ── */
+/* Cream background is preserved — visualizer bars float over page transparently */
+/* Only button transitions need protection from the wildcard */
+#musician-panel.listening .rp #music-listen-btn,
+#musician-panel.listening .rp #music-listen-btn * {
+  transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+#music-fixed-btn, #music-fixed-btn * {
+  transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+
+/* ── INTER-TRACK SCROLL PROMPTS ── */
+.track-transition {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity            0.4s  ease;
+}
+.track-transition-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* padding is inside inner so it collapses with the grid row */
+}
+.track-transition-inner-pad {
+  padding: 72px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.track-transition-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-light);
+}
+@keyframes scrollNudge {
+  0%, 100% { transform: translateY(0);   opacity: 0.3; }
+  50%       { transform: translateY(6px); opacity: 0.55; }
+}
+.track-transition-arrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--text-light);
+  animation: scrollNudge 2.6s ease-in-out infinite;
+  display: block;
+}
+#musician-panel.listening .track-transition {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  pointer-events: auto;
+}
+#musician-panel.listening .track-transition:last-of-type {
+  transition-delay: 0.07s;
+}
+#musician-panel.listening .track-transition-divider {
+  display: none;
+}
+
+@keyframes slideOutLeft  { from { transform:translateX(0);    opacity:1; } to { transform:translateX(-40px); opacity:0; } }
+@keyframes slideOutRight { from { transform:translateX(0);    opacity:1; } to { transform:translateX( 40px); opacity:0; } }
+@keyframes slideInRight  { from { transform:translateX(40px); opacity:0; } to { transform:translateX(0);    opacity:1; } }
+@keyframes slideInLeft   { from { transform:translateX(-40px);opacity:0; } to { transform:translateX(0);    opacity:1; } }
+.track-slide-out-left  { animation: slideOutLeft  0.22s ease forwards; overflow:hidden; }
+.track-slide-out-right { animation: slideOutRight 0.22s ease forwards; overflow:hidden; }
+.track-slide-in-right  { animation: slideInRight  0.28s ease forwards; }
+.track-slide-in-left   { animation: slideInLeft   0.28s ease forwards; }
+
+/* ── FIXED MUSIC BUTTON ── */
+#music-fixed-btn {
+  display: none;
+  position: fixed;
+  top: 77px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 420px;
+  height: 72px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: rgba(245,240,232,0.9);
+  border: 1px solid rgba(26,58,42,0.25);
+  color: var(--dark-green);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  padding: 0 24px;
+}
+#music-fixed-btn.playing {
+  background: rgba(26,58,42,0.88);
+  color: #f5f0e8;
+  border-color: transparent;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo" onclick="goTo(0)">Elijah Geduldig</span>
+  <ul class="nav-links">
+    <li><a onclick="goTo(1)" id="tab0">Student Researcher</a></li>
+    <li><a onclick="goTo(2)" id="tab1">People Helper</a></li>
+    <li><a onclick="goTo(3)" id="tab2">Musician</a></li>
+  </ul>
+</nav>
+
+<div class="slider-viewport">
+  <div class="slider-track" id="track">
+
+    <!-- ══ PANEL 0: HOME ══ -->
+    <div class="slide-panel">
+      <div class="home-slide">
+        <video class="home-video" autoplay muted loop playsinline preload="auto" src="1yosemitevid.mp4"></video>
+        <div class="home-inner">
+          <div class="home-left">
+            <h1 class="home-headline"><span onclick="goTo(1)" style="cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Student Researcher,</span><br><span onclick="goTo(2)" style="cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">People Helper,</span><br><span onclick="goTo(3)" style="cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">and Musician.</span></h1>
+          </div>
+          <div class="home-footer-bar">
+            <span class="home-footer-year">© 2026 · Designed &amp; built by Elijah Geduldig</span>
+            <div class="home-footer-links">
+              <a href="https://www.linkedin.com/in/elijahgeduldig/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/elijah_skye_music/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:5px;margin-bottom:2px;"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.012 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.012 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.012-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Music Instagram</a>
+              <span style="position:relative;display:inline-flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;letter-spacing:0.04em;" onclick="navigator.clipboard.writeText('elijahgeduldig@gmail.com');window.location.href='mailto:elijahgeduldig@gmail.com';void Promise.resolve().then(()=>{const t=this.querySelector('.copy-tip');t.style.opacity='1';t.style.transform='translateX(-50%) translateY(-4px)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(4px)'},1200)})"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>elijahgeduldig@gmail.com<span class="copy-tip" style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--dark-green);color:#fff;font-size:9px;padding:3px 7px;letter-spacing:0.08em;white-space:nowrap;opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;pointer-events:none;">Copied!</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PANEL 1: RESEARCHER ══ -->
+    <div class="slide-panel">
+      <div class="rp" style="padding-bottom:0;">
+        <div class="researcher-hero">
+          <video class="researcher-hero-video" autoplay muted loop playsinline preload="none" data-src="1" src="2sunsetvid.MOV" id="researcherVid"></video>
+          <div class="researcher-hero-gradient"></div>
+          <div class="researcher-hero-content">
+            <div style="display:flex;align-items:flex-end;gap:32px;">
+              <img src="3portrait.png" style="width:160px;height:200px;object-fit:cover;object-position:center top;display:block;flex-shrink:0;">
+              <div>
+                <div class="researcher-hero-kicker">UC Santa Barbara &nbsp;·&nbsp; BA Sociology &nbsp;·&nbsp; Minor in Applied Psychology</div>
+                <div class="researcher-hero-kicker-minor" style="">Distinction in the Major (Honors Thesis &amp; Graduate-Level Course)</div>
+                <h1 class="researcher-hero-headline">Student Researcher</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Thesis statement band -->
+        <div style="padding:20px 48px 52px 48px;background:var(--dark-green);position:relative;">
+          <div style="text-align:center;margin-bottom:28px;cursor:pointer;" onclick="slowScroll(document.querySelectorAll('.slide-panel')[1],400,1800)"><span style="animation:bounceChevron 2.8s ease-in-out infinite;display:inline-block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:2rem;color:rgba(245,240,232,0.4);line-height:1;">&#8964;</span></div>
+          <p style="font-family:'Lora',serif;font-size:1.05rem;line-height:1.85;color:rgba(245,240,232,0.88);margin:0;">During my time in college, I've built skills in experimental methods, statistical analysis, and high-level academic writing. Sociology and Applied Psychology at UCSB gave me a truly wide-ranging education within the social sciences, with course topics spanning cognitive development, global incarceration, social stratification, and much more. But what separates my experience from most undergraduates' is that I didn't just take classes and write short papers; I envisioned, planned, funded, and completed a 46-page original research project. This honors thesis, in tandem with my additional research experience, gave me the skills and confidence to successfully manage complex projects that require funding, study design, quantitative analysis, and extensive professional writing.</p>
+        </div>
+        <div class="rp-inner">
+        <div style="height:90px;"></div>
+        <div style="text-align:center;padding-bottom:20px;">
+          <span style="font-size:12px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);">UC Santa Barbara: R1 Research University &nbsp;·&nbsp; #5 Public University, U.S. News &amp; World Report 2022</span>
+        </div>
+        <div class="cred-strip">
+          <div class="cred-item">
+            <div class="cred-number">3.77</div>
+            <div class="cred-label">Cumulative GPA</div>
+            <div class="cred-explain">distinction in the major</div>
+          </div>
+          <div class="cred-divider"></div>
+          <div class="cred-item">
+            <div class="cred-number">7×</div>
+            <div class="cred-label">Dean's Honor List</div>
+            <div class="cred-explain">undergraduate recognition</div>
+          </div>
+          <div class="cred-divider"></div>
+          <div class="cred-item">
+            <div class="cred-number">3</div>
+            <div class="cred-label">Conferences</div>
+            <div class="cred-explain">original research<br>presented</div>
+          </div>
+        </div>
+
+
+        <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Honors Thesis</div><div class="section-rule-line"></div></div>
+
+        <div class="thesis-feature">
+          <div class="thesis-body">
+            <div class="thesis-eyebrow">Honors Thesis · Sep 2025 – Mar 2026</div>
+            <h2 class="thesis-headline">Have You Tried Talking With a Chatbot?<br>Treatment Stigma Toward LLM-Based Mental Health Support</h2>
+            <p>Millions of Americans now turn to ChatGPT for mental health support, yet almost no research has investigated how they're perceived for it. I designed a nationally representative survey experiment (<i>N</i> = 435) and found that ChatGPT occupies a "middle ground," reducing stigma compared to doing nothing, but not closing the gap with therapy. This suggests that, while LLMs may serve as a low-threshold entry point into mental health care, they do not fundamentally reshape broader patterns of mental health stigma.</p>
+            <div style="display:flex;gap:28px;align-items:flex-start;margin-bottom:16px;padding:18px 0;border-top:1px solid rgba(26,58,42,0.1);border-bottom:1px solid rgba(26,58,42,0.1);">
+              <div style="flex-shrink:0;">
+                <div style="font-style:italic;font-size:28px;color:var(--dark-green);line-height:1;margin-bottom:4px;">46</div>
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);">pages</div>
+              </div>
+              <div style="width:1px;background:rgba(26,58,42,0.1);align-self:stretch;flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:5px;">Presented at</div>
+                <div style="font-style:italic;font-size:13px;color:var(--dark-green);line-height:1.4;">Pacific Sociological Association · Long Beach, CA · April 2026</div>
+              </div>
+              <div style="width:1px;background:rgba(26,58,42,0.1);align-self:stretch;flex-shrink:0;"></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-light);margin-bottom:5px;">Recognized by</div>
+                <div style="font-style:italic;font-size:13px;color:var(--dark-green);line-height:1.4;">Alpha Kappa Delta · International Sociology Honor Society</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:nowrap;margin-bottom:20px;align-items:center;">
+              <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--dark-green);color:rgba(245,240,232,0.92);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;">Awarded URCA Grant</span>
+              <span style="padding:5px 10px;border:1px solid rgba(26,58,42,0.2);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;white-space:nowrap;">Quantitative</span>
+              <span style="padding:5px 10px;border:1px solid rgba(26,58,42,0.2);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;white-space:nowrap;">Survey Experiment</span>
+              <span style="padding:5px 10px;border:1px solid rgba(26,58,42,0.2);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;white-space:nowrap;">Mental Health</span>
+              <span style="padding:5px 10px;border:1px solid rgba(26,58,42,0.2);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;white-space:nowrap;">Stigma</span>
+            </div>
+
+            <a href="https://docs.google.com/document/d/17yDePz_zqFxrCWWZ1426WioQG97kCURB-CC7IbAde48/edit?usp=sharing" target="_blank" class="thesis-read-link" style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--warm-red);color:var(--warm-red);padding:12px 24px;text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;transition:background 0.25s ease;">
+              <span>Read the Thesis</span>
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+            <style>.thesis-read-link:hover { background: rgba(139,36,36,0.08); }
+.spotify-link:hover { background: rgba(139,36,36,0.08); }</style>
+          </div>
+          <div class="thesis-aside">
+            <img src="4psa.jpeg" style="width:100%;height:100%;object-fit:cover;object-position:72% center;display:block;">
+          </div>
+        </div>
+
+        <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Research &amp; Academic Roles</div><div class="section-rule-line"></div></div>
+
+        <div class="roles-section">
+          <div class="role-block">
+            <a href="https://drive.google.com/file/d/1km4XjyoCuvkXj11YaUu2LfBNeAi3qE9t/view?usp=sharing" target="_blank" style="display:block;position:relative;width:100%;height:100%;min-height:260px;overflow:hidden;text-decoration:none;" class="slide-link">
+              <img src="5hei.jpeg" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#0d2240;">
+              <div class="slide-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 0.25s ease;pointer-events:none;"></div>
+              <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;pointer-events:none;">
+                <span style="
+                  display:inline-flex;align-items:center;gap:7px;
+                  color:rgba(245,240,232,0.9);
+                  font-family:'DM Sans',sans-serif;
+                  font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;
+                ">View Slides
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="rgba(245,240,232,0.9)" stroke-width="1.8"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+                </span>
+              </div>
+            </a>
+            <style>
+              .slide-link:hover .slide-overlay { background: rgba(0,0,0,0.48) !important; }
+            </style>
+            <div class="role-text">
+              <div class="role-year-badge">Nov 2024 – Jun 2025</div>
+              <div class="role-badge">Research Assistant</div>
+              <div class="role-org">UCSB Communication, Health, and Emerging Media Laboratory</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Developed a survey experiment studying anti-vaping messaging effectiveness in minority young adults, a population largely underrepresented in health communication research. My work focused on identifying and adapting validated scales for key constructs, including measures of subjective socioeconomic status, religiosity, and substance-use stigma. Co-presented findings with the research team at the 2025 UCSB Health Equity Conference. The process of learning how to find, evaluate, and adapt existing scales directly shaped how I approached my thesis, grounding it in established measures rather than building from scratch.</div>
+            </div>
+          </div>
+          <div class="role-block flip">
+            <img src="6healthequity.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+            <div class="role-text">
+              <div class="role-year-badge">Nov 2023 – Jun 2024</div>
+              <div class="role-badge">Researcher</div>
+              <div class="role-org">UCSB Health Equity Internship</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Led a three-person team in analyzing youth mental health trends using CDC survey data in R. Presented findings via poster at the 2024 UCSB Health Equity Conference. Working on this project taught me that the best research questions yield compelling results regardless of outcome, an important lesson that eventually influenced my approach to my thesis. While none of our hypothesized correlates reached significance, our core finding stood on its own: mental health outcomes in young women are getting considerably worse.</div>
+            </div>
+          </div>
+          <div class="role-block">
+            <img src="7soc152a.png" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+            <div class="role-text">
+              <div class="role-year-badge">May 2023 – Mar 2025</div>
+              <div class="role-badge">Grader</div>
+              <div class="role-org">SOC 152A — Sociology of Human Sexuality</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Invited to grade for SOC 152A after earning one of the highest scores in the course and subsequent graduate-course-style seminar. As a grader, I developed and calibrated grading rubrics for midterms and finals, then graded for the 400-student class. I also proctored exams and attended regular meetings with the professors. SOC 152A was one of my favorite classes at UCSB and included topics I believe to be universally important to learn about, so contributing to other students' experience of it was rewarding work.</div>
+            </div>
+          </div>
+          <div class="role-block flip role-block--narrow">
+            <a href="https://ivarts.ihc.ucsb.edu/word-magazine/word-magazine-issue-53/" target="_blank" style="display:block;position:relative;width:100%;height:100%;min-height:260px;overflow:hidden;text-decoration:none;" class="slide-link">
+              <img src="8word.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+              <div class="slide-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background 0.25s ease;pointer-events:none;"></div>
+              <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;pointer-events:none;">
+                <span style="display:inline-flex;align-items:center;gap:7px;color:rgba(245,240,232,0.9);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;">Read Magazine (pg. 18)
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="rgba(245,240,232,0.9)" stroke-width="1.8"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+                </span>
+              </div>
+            </a>
+            <div class="role-text">
+              <div class="role-year-badge">Jan 2024 – Jun 2024</div>
+              <div class="role-badge">Journalist &amp; Distribution Captain</div>
+              <div class="role-org">WORD Magazine</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Wrote articles and conducted interviews for an award-winning campus publication, building real skills in cold outreach, interview preparation, and source management. My main piece covered homelessness in Isla Vista, and I'm proud of how it humanizes its subjects and takes their history seriously. My co-author and I built the piece through persistent cold outreach to local homeless services, eventually landing interviews that made the story possible. I also served as Distribution Captain, working with local businesses and community organizations to get the magazine into the hands of Isla Vista residents.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Selected Papers &amp; Projects</div><div class="section-rule-line"></div></div>
+
+        <div class="papers-list">
+          <div class="paper-row">
+            <div class="paper-row-left">
+              <div class="paper-row-label">Paper · SOC 218C — Culture (Graduate Seminar)</div>
+              <div class="paper-row-title">The Work of Art in the Age of AI Reproduction</div>
+            </div>
+            <div class="paper-row-right">
+              <div class="paper-row-desc">Applies Walter Benjamin's theories of aura, cult value, and the aestheticization of politics to AI-generated art, from deepfakes and AI "singers" to White House propaganda and the Iran war. Written for a graduate sociology seminar.</div>
+              <a href="https://docs.google.com/document/d/1eUuEssSIk0x29dnpCIzkA_RDyso62C_j3d_jT17zX-E/edit?usp=sharing" class="paper-row-link" target="_blank">Read the paper →</a>
+            </div>
+          </div>
+
+          <div class="paper-row">
+            <div class="paper-row-left">
+              <div class="paper-row-label">Paper · SOC 130C — Sociology of Law</div>
+              <div class="paper-row-title">Youth Justice in the United States</div>
+            </div>
+            <div class="paper-row-right">
+              <div class="paper-row-desc">Examines the harsh realities of juvenile incarceration in the U.S., including stark racial disparities, public opinion favoring rehabilitation, and why structural and political forces keep the system from changing.</div>
+              <a href="https://docs.google.com/document/d/1ZOhyAaWPhmfIt3_ZL3QeWQHGJSEXnzl5jM2bZmz6SrQ/edit?usp=sharing" class="paper-row-link" target="_blank">Read the paper →</a>
+            </div>
+          </div>
+          <div class="paper-row">
+            <div class="paper-row-left">
+              <div class="paper-row-label">Research Proposal · CNCSP 102 — Counseling Psychology</div>
+              <div class="paper-row-title">Effects of Nature on the Mental Well-Being of Adolescents from Low-Income Backgrounds</div>
+            </div>
+            <div class="paper-row-right">
+              <div class="paper-row-desc">Proposes a study examining whether increased time in nature improves mental well-being for low-income adolescents, a population largely missing from existing research. Designed as a Qualtrics survey across three Oakland public high schools.</div>
+              <a href="https://docs.google.com/document/d/19QoAnaApGNrw8ihk54hT55Y2L3ae-LZWUYVDCsEoLtQ/edit?usp=sharing" class="paper-row-link" target="_blank">Read the proposal →</a>
+            </div>
+          </div>
+        </div>
+
+        </div><!-- end rp-inner -->
+
+        <div style="text-align:center;padding:28px 48px 0;">
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(2)">Click or scroll to continue &nbsp;&#8250;</span>
+        </div>
+        <div style="border-top:1px solid rgba(26,58,42,0.12);padding:28px 48px;margin-top:28px;">
+          <div class="page-footer" style="border-top:none;padding-top:0;">
+            <span>© 2026 · Designed &amp; built by Elijah Geduldig</span>
+            <div class="page-footer-links">
+              <a href="https://www.linkedin.com/in/elijahgeduldig/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/elijah_skye_music/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.012 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.012 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.012-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Music Instagram</a>
+              <span style="position:relative;display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--text-dark);font-size:11px;letter-spacing:0.04em;" onclick="navigator.clipboard.writeText('elijahgeduldig@gmail.com');window.location.href='mailto:elijahgeduldig@gmail.com';void Promise.resolve().then(()=>{const t=this.querySelector('.copy-tip');t.style.opacity='1';t.style.transform='translateX(-50%) translateY(-4px)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(4px)'},1200)})"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>elijahgeduldig@gmail.com<span class="copy-tip" style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--dark-green);color:#fff;font-size:9px;padding:3px 7px;letter-spacing:0.08em;white-space:nowrap;opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;pointer-events:none;">Copied!</span></span>
+            </div>
+          </div>
+        </div>
+      </div><!-- end rp -->
+    </div>
+
+    <!-- ══ PANEL 2: PEOPLE HELPER ══ -->
+    <div class="slide-panel">
+      <div class="rp" style="padding-bottom:0;">
+
+        <!-- Hero -->
+        <div class="researcher-hero">
+          <video autoplay muted loop playsinline preload="none" class="researcher-hero-video" style="filter:brightness(0.78);" src="9redwoodvid.mp4"></video>
+          <div class="researcher-hero-gradient"></div>
+          <div class="researcher-hero-content">
+            <div style="display:flex;align-items:flex-end;gap:32px;">
+              <div>
+                <div class="researcher-hero-kicker">Applied Psychology &nbsp;·&nbsp; Youth Development &nbsp;·&nbsp; Wilderness Medicine</div>
+                <div class="researcher-hero-kicker-minor" style="">Behavior Technician, Counselor &amp; First Responder</div>
+                <h1 class="researcher-hero-headline" style="opacity:1!important;visibility:visible!important;">People Helper</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thesis statement band -->
+        <div style="padding:20px 48px 52px 48px;background:var(--dark-green);position:relative;">
+          <div style="text-align:center;margin-bottom:28px;cursor:pointer;" onclick="slowScroll(document.querySelectorAll('.slide-panel')[2],400,1800)"><span style="animation:bounceChevron 2.8s ease-in-out infinite;display:inline-block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:2rem;color:rgba(245,240,232,0.4);line-height:1;">&#8964;</span></div>
+          <p style="font-family:'Lora',serif;font-size:1.05rem;line-height:1.85;color:rgba(245,240,232,0.88);margin:0;">In each of the following roles, my job was to help people directly. Whether supporting children with autism in developing the tools they need to navigate the world, mentoring teenagers through service work with unhoused communities, or getting a group of strangers into the wilderness for the first time, I am someone who brings both professional dedication and genuine care to my work.</p>
+        </div>
+
+        <div class="rp-inner">
+        <div style="height:56px;"></div>
+
+        <!-- Supervisor quote -->
+        <div class="people-fade" style="margin:0 -48px 72px;padding:64px 72px;border-top:1px solid rgba(26,58,42,0.08);border-bottom:1px solid rgba(26,58,42,0.08);">
+          <div style="display:flex;gap:40px;align-items:flex-start;">
+            <div style="font-family:'Playfair Display',serif;font-size:6rem;color:var(--warm-red);line-height:0.7;flex-shrink:0;margin-top:8px;">&#8220;</div>
+            <div>
+              <p style="font-size:1.1rem;line-height:1.95;color:var(--text-mid);margin-bottom:14px;"><strong style="font-weight:600;color:var(--text-dark);">Elijah is a deeply compassionate and skilled worker whose dedication to care, emotional support, and meaningful programming made a significant impact on our program.</strong></p>
+              <p style="font-size:1.1rem;line-height:1.95;color:var(--text-mid);margin-bottom:14px;">He brings strong mastery of all counselor roles, fostering deep connections with campers, especially those in need of extra support, through patience, creativity, and empathy.</p>
+              <p style="font-size:1.1rem;line-height:1.95;color:var(--text-mid);margin-bottom:28px;">Elijah's calming presence, emotional intelligence, and musical facilitation added so much value to the campers experience and our team.&#8221;</p>
+              <div style="width:28px;height:1px;background:var(--warm-red);margin-bottom:16px;"></div>
+              <div style="font-size:15px;color:var(--text-dark);margin-bottom:4px;letter-spacing:0.02em;">Eliana Goldfarb</div>
+              <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-light);">Supervisor, Teen Leadership Program · Camp Tawonga</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PILLAR 1: Working with People -->
+        <div class="section-rule people-fade"><div class="section-rule-line"></div><div class="section-rule-label">Working with People</div><div class="section-rule-line"></div></div>
+
+        <div class="roles-section">
+
+          <!-- Behavior Technician -->
+          <div class="role-block">
+            <img src="10lbs.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:260px;">
+            <div class="role-text">
+              <div class="role-year-badge">Sep 2025 – Present</div>
+              <div class="role-badge">Behavior Technician</div>
+              <div class="role-org">Learning Beyond the Spectrum</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Provide individualized ABA therapy sessions for children ages 6–9 with autism and other neurodivergent profiles at a play-based clinic. Work involves tracking behavioral data across sessions, including antecedent-behavior-consequence records and frequency of heightened behaviors, while implementing strategies like natural environment teaching, role play, and antecedent manipulation. Activities range from circle time and group work to targeted table sessions focused on specific skills like dealing with losing or emotional regulation. I absolutely adore playing a part in helping my kids develop the tools they need to navigate the world, and doing it through play and love. Watching them practice square breathing for the first time when feeling frustrated or learning to use kind words with their peers fills me with genuine pride.</div>
+            </div>
+          </div>
+
+          <!-- IAP -->
+          <div class="role-block flip">
+            <div style="width:100%;min-height:260px;background:#ffffff;display:flex;align-items:center;justify-content:center;padding:48px;">
+              <img src="11iap.jpeg" style="width:100%;max-width:200px;height:auto;object-fit:contain;display:block;opacity:0.85;">
+            </div>
+            <div class="role-text">
+              <div class="role-year-badge">Jan 2025 – Jun 2025</div>
+              <div class="role-badge">Non-Clinical Intern</div>
+              <div class="role-org">Institute for the Advancement of Psychotherapy</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">Interned at a Bay Area psychotherapy clinic, supporting administrative and digital operations. The highlight was participating in therapist-led case consultation meetings, where clinicians openly discussed client challenges and worked through them together. It was a rare window into how experienced therapists actually think and practice, and left me with a much clearer picture of what a career in mental health looks like from the inside.</div>
+            </div>
+          </div>
+
+        </div><!-- end roles-section -->
+        </div><!-- end rp-inner — break out for full bleed -->
+
+        <!-- Camp Tawonga sticky video + role blocks (one at a time) -->
+        <div id="tawonga-outer" style="height:250vh;">
+          <div style="position:sticky;top:0;height:calc(100vh - 65px);display:grid;background:#1a1a1a;">
+            <video id="tawonga-vid" muted loop playsinline preload="metadata" poster="12tawongavid.MOV" style="grid-area:1/1;width:100%;height:100%;object-fit:cover;filter:brightness(0.78);opacity:0;transition:opacity 1.6s ease;">
+              <source src="12tawongavid.MOV">
+            </video>
+            <div style="grid-area:1/1;background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,0.45) 100%);"></div>
+            <!-- Counselor block -->
+            <div id="tawonga-block-1" style="grid-area:1/1;align-self:center;justify-self:stretch;z-index:2;opacity:0;padding:0 48px;transition:opacity 0.5s ease;">
+              <div style="max-width:1200px;margin:0 auto;">
+                <div class="role-block" style="margin:0;border:none;">
+                  <img src="13counselor.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:160px;">
+                  <div class="role-text" style="background:none;padding:24px 32px;">
+                    <div class="role-year-badge" style="color:rgba(245,240,232,0.6);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Jun 2023 – Aug 2024</div>
+                    <div class="role-badge" style="color:#ffffff;text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Counselor</div>
+                    <div class="role-org" style="color:#f5f0e8;text-shadow:0 1px 8px rgba(0,0,0,0.85), 0 3px 24px rgba(0,0,0,0.6);">Camp Tawonga</div>
+                    <div class="role-divider" style="background:rgba(245,240,232,0.25);"></div>
+                    <div class="role-desc" style="color:rgba(245,240,232,0.88);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">I was a camper at Tawonga for nine years, and it is my favorite place on earth. Getting to go back as a counselor and give my campers the experience I had as a kid was one of the most meaningful things I've ever done.<br><br>After a comprehensive week-long training grounded in Tawonga's Canon of Ethics, a set of professional principles I'll carry into every job I have, I spent ten weeks co-counseling bunks of campers aged 7–16. The days were long, with only three hours off and sleeping in the bunk with the campers. The responsibility was all-encompassing: keeping twelve kids on time, fed, hydrated, and accounted at all times while resolving conflicts, managing homesickness, and making sure every one of them felt loved and seen. I played guitar for my campers every single day and sang them to sleep every night. Tawonga's mission is fostering positive self-image and self-esteem, and I got to live that first as a kid and then help my own campers grow into their weird, confident little selves.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- TLI block -->
+            <div id="tawonga-block-2" style="grid-area:1/1;align-self:center;justify-self:stretch;z-index:2;opacity:0;padding:0 48px;transition:opacity 0.5s ease;">
+              <div style="max-width:1200px;margin:0 auto;">
+                <div class="role-block flip" style="margin:0;border:none;">
+                  <img src="14tli.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;min-height:160px;">
+                  <div class="role-text" style="background:none;padding:24px 32px;">
+                    <div class="role-year-badge" style="color:rgba(245,240,232,0.6);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Jul 2025 – Aug 2025</div>
+                    <div class="role-badge" style="color:#ffffff;text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Teen Leadership Institute: Environment and Leadership Facilitator</div>
+                    <div class="role-org" style="color:#f5f0e8;text-shadow:0 1px 8px rgba(0,0,0,0.85), 0 3px 24px rgba(0,0,0,0.6);">Camp Tawonga</div>
+                    <div class="role-divider" style="background:rgba(245,240,232,0.25);"></div>
+                    <div class="role-desc" style="color:rgba(245,240,232,0.88);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Led 22 teenagers on a two-week service-learning road trip from Yosemite to Portland, responsible for their safety, well-being, and emotional support the entire way. As the camp saying goes: "big kids, big problems." Out in the real world, far from the constraints of camp, I managed real teenage struggles including mental health crises and relationship conflicts while ensuring everyone made it to the river rafting, mountain biking, outdoor climbing, and camping stops along the way.<br><br>In Portland, we partnered with nonprofits including Dignity Village to build tiny homes for unhoused residents, and the teens got to hear directly from the people they were helping. I also led the men's campfire, a Tawonga tradition where male-identifying teens talk openly about their masculinity and how to be good to themselves and others, one of the most meaningful experiences I've had at Tawonga. I chose to highlight this background video because it captures what TLI was really about: helping campers face their fears and form friendships and experiences they will carry with them forever.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="grid-area:1/1;align-self:end;height:2px;background:var(--cream);z-index:3;"></div>
+          </div>
+        </div>
+        <script>
+          (function() {
+            const panel = document.querySelectorAll('.slide-panel')[2];
+            const block1 = document.getElementById('tawonga-block-1');
+            const block2 = document.getElementById('tawonga-block-2');
+            const outer = document.getElementById('tawonga-outer');
+            let state = 0; // 0 = neither, 1 = block1, 2 = block2, 3 = exited
+            let cooldown = false;
+            const COOLDOWN_MS = 800;
+
+            function setBlocks(s) {
+              block1.style.opacity = s === 1 ? '1' : '0';
+              block2.style.opacity = s === 2 ? '1' : '0';
+            }
+
+            function lockScroll(ms) {
+              cooldown = true;
+              const snapPos = panel.scrollTop;
+              panel.style.overflow = 'hidden';
+              setTimeout(() => {
+                panel.style.overflow = 'auto';
+                panel.scrollTop = snapPos;
+                cooldown = false;
+              }, ms);
+            }
+
+            function advance() {
+              if (cooldown) return;
+              const sectionTop = outer.offsetTop;
+              const sectionBottom = sectionTop + outer.offsetHeight;
+              const scrolled = panel.scrollTop;
+              const panelH = panel.clientHeight;
+
+              if (scrolled < sectionTop + panelH * 0.7) { state = 0; setBlocks(0); return; }
+              if (scrolled > sectionBottom - panelH) { state = 3; setBlocks(0); return; }
+
+              if (state === 0) { state = 1; setBlocks(1); lockScroll(1000); return; }
+              if (state === 1) { state = 2; setBlocks(2); lockScroll(1000); return; }
+              if (state === 2) { state = 3; setBlocks(0); return; }
+            }
+
+            function retreat() {
+              if (cooldown) return;
+              const sectionTop = outer.offsetTop;
+              const scrolled = panel.scrollTop;
+              const panelH = panel.clientHeight;
+
+              if (scrolled + panelH < sectionTop + 100) { state = 0; setBlocks(0); return; }
+
+              if (state === 3) { state = 2; setBlocks(2); lockScroll(1000); return; }
+              if (state === 2) { state = 1; setBlocks(1); lockScroll(1000); return; }
+              if (state === 1) {
+                state = 0; setBlocks(0);
+                cooldown = true;
+                const exitPos = sectionTop - 10;
+                panel.style.overflow = 'hidden';
+                setTimeout(() => {
+                  panel.style.overflow = 'auto';
+                  panel.scrollTop = exitPos;
+                  cooldown = false;
+                }, 900);
+                return;
+              }
+            }
+
+            function lock() {
+              cooldown = true;
+              setTimeout(() => { cooldown = false; }, COOLDOWN_MS);
+            }
+
+            let lastScroll = panel.scrollTop;
+
+            // Use wheel events for section control so we can block input during cooldown
+            panel.addEventListener('wheel', (e) => {
+              const sectionTop = outer.offsetTop;
+              const sectionBottom = sectionTop + outer.offsetHeight;
+              const scrolled = panel.scrollTop;
+              const panelH = panel.clientHeight;
+              const inSection = scrolled >= sectionTop + panelH * 0.7 && scrolled <= sectionTop + panelH * 1.5;
+
+              if (inSection && (state === 0 || state === 1 || (e.deltaY < 0 && (state === 2 || state === 3)))) {
+                e.preventDefault();
+                if (cooldown) return;
+                if (e.deltaY > 0) advance();
+                else retreat();
+              }
+            }, { passive: false });
+
+            // Still use scroll for entry/exit detection
+            panel.addEventListener('scroll', () => {
+              const current = panel.scrollTop;
+              const sectionTop = outer.offsetTop;
+              const sectionBottom = sectionTop + outer.offsetHeight;
+
+              if (current < sectionTop + 50) { state = 0; setBlocks(0); }
+              else if (current > sectionBottom - 50) { state = 3; setBlocks(0); }
+              lastScroll = current;
+            });
+
+            setBlocks(0);
+          })();
+        </script>
+        <script>
+          (function() {
+            const vid = document.getElementById('tawonga-vid');
+            const outer = document.getElementById('tawonga-outer');
+            const panel = document.querySelectorAll('.slide-panel')[2];
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  vid.play().catch(() => {});
+                  vid.style.opacity = '1';
+                } else {
+                  vid.pause();
+                }
+              });
+            }, { root: panel, threshold: 0.1 });
+            observer.observe(outer);
+          })();
+        </script>
+
+        <!-- PILLAR 2: Outdoors & Wilderness -->
+        <div style="background:var(--cream);">
+          <div class="rp-inner">
+            <div style="height:56px;"></div>
+            <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Outdoors &amp; Wilderness</div><div class="section-rule-line"></div></div>
+
+            <div class="roles-section">
+
+              <!-- WFR: image left, text right -->
+              <div class="role-block">
+                <img src="15wfr.png" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:260px;">
+                <div class="role-text">
+                  <div class="role-year-badge">Jun 2025 · Valid through Jun 2027</div>
+                  <div class="role-badge">Certification</div>
+                  <div class="role-org">Wilderness First Responder</div>
+                  <div class="role-divider"></div>
+                  <div class="role-desc">Completed the Wilderness First Responder certification through a five-day in-person intensive in Estes Park, Colorado from 8am to 6pm daily, preceded by 40 hours of online coursework. The curriculum covered everything from patient assessment and trauma management to splinting, environmental emergencies, and evacuation planning—essentially everything that could go wrong far from a hospital. The course was heavily scenario-based, with rotating role-play exercises that put skills into practice in realistic field conditions, including an extended evening scenario. I traveled solo to Colorado specifically to get my WFR so I could be as prepared as possible for leading groups in remote wilderness settings.</div>
+                  <div style="margin-top:20px;margin-bottom:4px;display:inline-flex;width:fit-content;align-items:center;gap:12px;border:1px solid var(--dark-green);padding:14px 20px;align-items:center;">
+                    <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;color:var(--dark-green);line-height:1;vertical-align:middle;">#1</span>
+                    <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid-green);line-height:1.5;" style="vertical-align:middle;">Wilderness medicine certification below EMT</span>
+                  </div>
+                  <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;">
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Patient Assessment</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Trauma Management</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Evacuation Planning</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Environmental Medicine</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Excursion Club -->
+              <div class="role-block flip">
+                <img src="16exc.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;min-height:260px;">
+                <div class="role-text">
+                  <div class="role-year-badge">Mar 2024 – Present</div>
+                  <div class="role-badge">Outdoor Trip Leader</div>
+                  <div class="role-org">UCSB Excursion Club</div>
+                  <div class="role-divider"></div>
+                  <div class="role-desc">Plan and lead outdoor trips for Excursion Club, a 1,000+ member student-run organization at UCSB, also attending weekly meetings and volunteering at gear checkout. Over 20 trips led across the Santa Barbara region, ranging from backpacking in Ojai and climbing in the Santa Barbara mountains to kayaking to the Isla Vista oil rig, sunrise ocean dips, and organizing a skydiving trip. A huge portion of participants are international and study abroad students, many of whom sought out the club specifically for its reputation. Santa Barbara is one of the most stunning outdoor environments in the world, and sharing it with people from all over the globe was one of my favorite parts of my time at UCSB.</div>
+                  <div style="margin-top:20px;display:inline-flex;width:fit-content;align-items:center;gap:12px;border:1px solid var(--dark-green);padding:14px 20px;align-items:center;">
+                    <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;color:var(--dark-green);line-height:1;vertical-align:middle;">20+</span>
+                    <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid-green);line-height:1.5;" style="vertical-align:middle;">Trips led</span>
+                  </div>
+                  <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Trip Planning</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Risk Assessment</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Group Leadership</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Mindfulness Facilitation</span>
+                    <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Emergency Response</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div><!-- end outdoors section -->
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:28px 48px 0;background:var(--cream);">
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(3)">Click or scroll to continue &nbsp;&#8250;</span>
+        </div>
+        <div style="background:var(--cream);border-top:1px solid rgba(26,58,42,0.12);padding:28px 48px;margin-top:28px;">
+          <div class="page-footer" style="border-top:none;padding-top:0;">
+            <span>© 2026 · Designed &amp; built by Elijah Geduldig</span>
+            <div class="page-footer-links">
+              <a href="https://www.linkedin.com/in/elijahgeduldig/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/elijah_skye_music/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.012 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.012 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.012-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Music Instagram</a>
+              <span style="position:relative;display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--text-dark);font-size:11px;letter-spacing:0.04em;" onclick="navigator.clipboard.writeText('elijahgeduldig@gmail.com');window.location.href='mailto:elijahgeduldig@gmail.com';void Promise.resolve().then(()=>{const t=this.querySelector('.copy-tip');t.style.opacity='1';t.style.transform='translateX(-50%) translateY(-4px)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(4px)'},1200)})"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>elijahgeduldig@gmail.com<span class="copy-tip" style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--dark-green);color:#fff;font-size:9px;padding:3px 7px;letter-spacing:0.08em;white-space:nowrap;opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;pointer-events:none;">Copied!</span></span>
+            </div>
+          </div>
+        </div>
+      </div><!-- end rp -->
+    </div>
+    <div class="slide-panel" id="musician-panel" style="background:var(--cream);position:relative;">
+      <div class="rp" style="padding-bottom:0;background:var(--cream);min-height:100%;">
+
+        <!-- Hero -->
+        <div class="researcher-hero">
+          <video autoplay muted loop playsinline preload="none" class="researcher-hero-video" style="filter:brightness(0.72);" src="17guitars.mp4"></video>
+          <div class="researcher-hero-gradient"></div>
+          <div class="researcher-hero-content">
+            <div style="display:flex;align-items:flex-end;gap:32px;">
+              <div>
+                <div class="researcher-hero-kicker">Film &nbsp;·&nbsp; Solo Music &nbsp;·&nbsp; Radio</div>
+                <div class="researcher-hero-kicker-minor" style="">Composer, Singer-Songwriter, and Broadcaster</div>
+                <h1 class="researcher-hero-headline" style="opacity:1!important;visibility:visible!important;">Musician</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thesis band -->
+        <div style="padding:20px 48px 52px 48px;background:var(--dark-green);position:relative;">
+          <div style="text-align:center;margin-bottom:28px;cursor:pointer;" onclick="slowScroll(document.querySelectorAll('.slide-panel')[3],400,1800)"><span style="animation:bounceChevron 2.8s ease-in-out infinite;display:inline-block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:2rem;color:rgba(245,240,232,0.4);line-height:1;">&#8964;</span></div>
+          <p style="font-family:'Lora',serif;font-size:1.05rem;line-height:1.85;color:rgba(245,240,232,0.88);margin:0;">Throughout everything else on this page, music has always been there, and over the last few years it's grown from a passion into a profession I'm actively building, one that has already led to award recognition and ongoing collaborations with working filmmakers and musicians. From scoring films, to writing, producing, and releasing my own music, to hosting a radio show, I've built a genuinely varied body of work and I'm just getting started.</p>
+        </div>
+
+
+        <!-- ── ORIGINAL MUSIC ── -->
+        <div class="rp-inner">
+          <!-- ── LISTEN BUTTON ── -->
+          <div style="display:flex;justify-content:center;margin:72px 0;">
+            <button id="music-listen-btn" onclick="toggleMusic()" style="width:420px;height:72px;display:inline-flex;align-items:center;justify-content:flex-start;gap:12px;background:rgba(245,240,232,0.9);border:1px solid rgba(26,58,42,0.25);color:var(--dark-green);font-family:'DM Sans',sans-serif;font-size:0.78rem;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;box-shadow:0 4px 20px rgba(0,0,0,0.12);transition:background 0.2s,color 0.2s;padding:0 24px;">
+              <span id="music-btn-icon" style="font-size:1rem;line-height:1;">&#9834;</span>
+              <span style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;text-align:center;">
+                <span id="music-btn-label">ENTER LISTENING MODE</span>
+                <span id="music-btn-track" style="font-family:'Playfair Display',serif;font-style:italic;font-size:0.82rem;text-transform:none;letter-spacing:0;display:none;"></span>
+              </span>
+            </button>
+          </div>
+          <div class="section-rule"><div class="section-rule-line"></div><div class="section-rule-label">Original Music</div><div class="section-rule-line"></div></div>
+
+          <!-- 1. SBIFF Composer -->
+          <div id="section-sbiff" style="margin-bottom:72px;" class="music-fade-el">
+            <!-- Title block -->
+            <div style="margin-bottom:28px;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--warm-red);margin-bottom:10px;">Composer</div>
+              <h2 style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(26px,3.2vw,40px);color:var(--dark-green);font-weight:400;line-height:1.15;margin-bottom:16px;">A Cure For Humanity</h2>
+              <!-- Credit tags row -->
+              <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+                <span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--dark-green);color:rgba(245,240,232,0.92);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;opacity:0.7;"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                  10-10-10 SBIFF Competition Winner
+                </span>
+                <span style="padding:6px 14px;border:1px solid rgba(26,58,42,0.25);color:var(--text-mid);font-size:11px;letter-spacing:0.07em;">10-10-10 Filmmaking Mentorship</span>
+                <span style="padding:6px 14px;border:1px solid rgba(26,58,42,0.25);color:var(--text-mid);font-size:11px;letter-spacing:0.07em;">Santa Barbara International Film Festival</span>
+              </div>
+            </div>
+
+            <!-- Photo + Video side by side -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:24px;">
+              <img src="20sbiff.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;">
+              <div style="aspect-ratio:16/9;background:#000;position:relative;overflow:hidden;">
+                <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/D9s59cTSp4w?rel=0" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="display:block;position:absolute;inset:0;width:100%;height:100%;"></iframe>
+              </div>
+            </div>
+
+            <div style="margin-bottom:24px;">
+              <p style="font-size:15px;line-height:1.8;color:var(--text-mid);">Composed the original score for "A Cure for Humanity," a short film created for the Santa Barbara International Film Festival's 10-10-10 program, which pairs ten screenwriters, ten directors, and ten composers to create and compete. Working closely with director Marine through extensive spotting sessions, I developed two original themes and composed variations of each to match the emotional beats of each scene. Crafted in Logic with a live pianist performing my compositions throughout, the score aimed for an unsettled sound inspired by Jonny Greenwood. At the Arlington Theater premiere, with a packed house and a red carpet, Marine won Best Director and I won the first ever 10-10-10 Best Composer award, one of my proudest achievements.</p>
+              <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Film Composition</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Logic Pro</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Thematic Composition</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Mixing & Mastering</span>
+              </div>
+              <div style="margin-top:20px;">
+                <a href="https://open.spotify.com/album/6G5A9wDmKC2Ut9rBJK8THl?si=4yY_sdCoSFCXDqNQjNPD3A" target="_blank" class="spotify-link" style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--warm-red);color:var(--warm-red);padding:12px 24px;text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;transition:background 0.25s ease;">
+                  Listen on Spotify
+                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inter-track: SBIFF → You Weren't Here -->
+          <div class="track-transition">
+            <div class="track-transition-inner">
+              <div class="track-transition-inner-pad">
+                <span class="track-transition-label">Keep scrolling to hear the next song</span>
+                <span class="track-transition-arrow">&#8964;</span>
+              </div>
+            </div>
+          </div>
+          <div class="track-transition-divider" style="height:1px;background:rgba(26,58,42,0.1);margin-bottom:72px;"></div>
+          <div class="role-block" style="margin-bottom:72px;" id="section-youwerehere">
+<img src="22ywh.jpeg" style="object-fit:cover;width:100%;display:block;display:block;min-height:260px;width:100%;">
+            <div class="role-text">
+              <div class="role-badge">Collaboration</div>
+              <div class="role-org">You Weren't Here / Evangeline</div>
+              <div class="role-divider"></div>
+              <div class="role-desc">A two-song collaboration with singer-songwriter Avital Chiara that came together organically after we started jamming together. I added fingerpicked guitar parts, harmonies, and a verse to her songs, then took the lead on recording and production. This process immensely sharpened my production skills, since collaborating with someone and bringing their vision to life helped me work with more focus and intention than anything I'd done solo. We recorded "You Weren't Here" in around a month over many late nights, then "Evangeline" came together much faster. Out of all the music I've put out, these are the tracks where the production feels the most human, intentional, and true to me.</div>
+              <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Guitar & Vocals</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Logic Pro</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Production</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Mixing & Mastering</span>
+              </div>
+              <a href="https://open.spotify.com/album/7eao3RohFwWtxBlpywjelM?si=EeZuy7tRQAeW4o7z8HYGdQ" target="_blank" class="spotify-link" style="display:inline-flex;align-items:center;gap:10px;margin-top:20px;border:1px solid var(--warm-red);color:var(--warm-red);padding:12px 24px;text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;transition:background 0.25s ease;align-self:flex-start;">
+                Listen on Spotify
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Inter-track: You Weren't Here → There Will Be More Things -->
+          <div class="track-transition">
+            <div class="track-transition-inner">
+              <div class="track-transition-inner-pad">
+                <span class="track-transition-label">Keep scrolling to hear the next song</span>
+                <span class="track-transition-arrow">&#8964;</span>
+              </div>
+            </div>
+          </div>
+          <div class="track-transition-divider" style="height:1px;background:rgba(26,58,42,0.1);margin-bottom:72px;"></div>
+
+          <!-- 3. There Will Be More Things (Live EP) -->
+          <div style="margin-bottom:72px;display:grid;grid-template-columns:1fr 280px;gap:0;border:1px solid rgba(26,58,42,0.1);" id="section-therewillbe">
+            <div class="role-text">
+              <div class="role-badge">Live EP</div>
+              <div class="role-org">There Will Be More Things</div>
+              <div class="role-divider"></div>
+              <div style="display:grid;grid-template-columns:1fr 1px 180px;gap:24px;align-items:start;">
+                <div class="role-desc">There Will Be More Things is an upcoming five-song EP, to be recorded live on air at KCSB 91.9 FM on May 16, 2026. After two years of working on this EP, I realized it belonged exactly as I'd been writing it: stripped down to just my guitar and voice. It's easily my most personal and, in my opinion, best songwriting thus far. Topics range from the fear of growing up and leaving behind the life you've always known, to the impossibility of truly feeling the scale of mass suffering. The thread running through all of it gives the EP its name.</div>
+                <div style="background:rgba(26,58,42,0.12);"></div>
+                <div style="padding-top:2px;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-light);margin-bottom:10px;">Tracklist</div>
+                  <div style="font-size:13px;color:var(--text-mid);font-family:'Lora',serif;font-style:italic;line-height:2;">1. Mirror Bird<br>2. Dreamt It All<br>3. A Million To One<br>4. My Future In Her Past<br>5. There Will Be More Things</div>
+                </div>
+              </div>
+              <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Songwriting</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Fingerpicked Guitar</span>
+                <span style="padding:4px 12px;border:1px solid rgba(26,58,42,0.18);font-size:11px;color:var(--text-mid);letter-spacing:0.05em;">Live Performance</span>
+              </div>
+              <div class="twbmt-kcsb-block" style="margin-top:20px;padding:14px 18px;background:rgba(26,58,42,0.04);border-left:2px solid var(--warm-red);">
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-light);margin-bottom:4px;">Upcoming</div>
+                <div style="font-size:13px;color:var(--dark-green);font-family:'Georgia',serif;">Live on KCSB 91.9 FM &nbsp;·&nbsp; May 16, 2026</div>
+              </div>
+            </div>
+            <img src="24twbmt.PNG" style="width:100%;height:100%;object-fit:cover;display:block;min-height:260px;">
+          </div>
+
+          <div style="height:1px;background:rgba(26,58,42,0.1);margin-bottom:72px;"></div>
+
+          <!-- Instagram -->
+          <div style="margin-bottom:72px;text-align:center;padding:8px 0;">
+            <p style="font-size:15px;line-height:1.8;color:var(--text-mid);margin-bottom:20px;">Follow along for new releases, performances, and projects.</p>
+            <a href="https://www.instagram.com/elijah_skye_music/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--dark-green);color:var(--dark-green);padding:12px 24px;text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;transition:background 0.25s ease;" onmouseover="this.style.background='rgba(26,58,42,0.05)'" onmouseout="this.style.background='transparent'">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.012 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.012 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.012-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+              @elijah_skye_music
+            </a>
+          </div>
+
+        </div><!-- end rp-inner -->
+
+        <!-- ── BROADCAST & LIVE SETS ── -->
+        <div class="broadcast-section" style="background:var(--cream);padding:72px 48px 0;">
+          <div style="max-width:1200px;margin:0 auto;">
+            <div class="section-rule" style="margin-bottom:56px;"><div class="section-rule-line"></div><div class="section-rule-label">Broadcast</div><div class="section-rule-line"></div></div>
+
+            <!-- Radio -->
+            <div class="role-block" style="margin-bottom:2px;">
+              <img src="25undertheinfluence.jpg" style="width:100%;height:100%;object-fit:contain;background:#ffffff;display:block;min-height:260px;">
+              <div class="role-text">
+                <div class="role-badge">Radio Host</div>
+                <div class="role-org">Under the Influence · 91.9 KCSB FM</div>
+                <div class="role-divider"></div>
+                <div class="role-desc">Hosted weekly radio shows on KCSB 91.9 FM, Mondays 2–3pm, for over a year and 35+ episodes. Each week, my co-host Finn and I pick a favorite artist and instead of playing their music, we dig into what inspired them, scouring interviews, Reddit AMAs, and artist playlists to find the music that shaped them. Every song must have under a million streams and every artist less than a million monthly Spotify listeners, which makes the research harder and the discovery much better. Between researching, scripting, and on-air chemistry and performance, it's a surprising amount of work that's always made worth it when listeners call in to say we introduced them to new music.</div>
+                <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                  <div style="display:inline-flex;width:fit-content;align-items:center;gap:12px;border:1px solid var(--dark-green);padding:14px 20px;">
+                    <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:2.2rem;color:var(--dark-green);line-height:1;vertical-align:middle;">35+</span>
+                    <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid-green);line-height:1.5;">Episodes aired</span>
+                  </div>
+                </div>
+                <!-- Playlists -->
+                <div style="margin-top:28px;">
+                  <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-light);margin-bottom:16px;">Featured Episodes on Spotify</div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:start;">
+                    <a href="https://open.spotify.com/playlist/5BwdfOrXXFLgzzLOUqzDDL?si=b4e7a0acbf1b4adb" target="_blank" style="display:block;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+                      <img src="26frankocean.jpg" style="width:100%;height:auto;display:block;">
+                      <div style="font-size:11px;color:var(--text-light);margin-top:6px;text-align:center;font-family:'Georgia',serif;font-style:italic;">Frank Ocean</div>
+                    </a>
+                    <a href="https://open.spotify.com/playlist/2nUEVnt2qDTi1wDjekFudL?si=db82fb075c494478" target="_blank" style="display:block;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+                      <img src="27daftpunk.jpg" style="width:100%;height:auto;display:block;">
+                      <div style="font-size:11px;color:var(--text-light);margin-top:6px;text-align:center;font-family:'Georgia',serif;font-style:italic;">Daft Punk</div>
+                    </a>
+                    <a href="https://open.spotify.com/playlist/5Lwx4A4sirDw00kq7JR4FG?si=80eb3bb5f0714fd8" target="_blank" style="display:block;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+                      <img src="28bigthief.jpg" style="width:100%;height:auto;display:block;">
+                      <div style="font-size:11px;color:var(--text-light);margin-top:6px;text-align:center;font-family:'Georgia',serif;font-style:italic;">Big Thief</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align:center;padding:28px 48px 0;background:var(--cream);">
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(0)">&#8249;&nbsp; Back to the beginning</span>
+        </div>
+        <div style="background:var(--cream);border-top:1px solid rgba(26,58,42,0.12);padding:28px 48px;margin-top:28px;">
+          <div class="page-footer" style="border-top:none;padding-top:0;">
+            <span>© 2026 · Designed &amp; built by Elijah Geduldig</span>
+            <div class="page-footer-links">
+              <a href="https://www.linkedin.com/in/elijahgeduldig/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg>LinkedIn</a>
+              <a href="https://www.instagram.com/elijah_skye_music/" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;margin-right:5px;"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.012 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.012 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.012-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>Music Instagram</a>
+              <span style="position:relative;display:inline-flex;align-items:center;gap:5px;cursor:pointer;color:var(--text-dark);font-size:11px;letter-spacing:0.04em;" onclick="navigator.clipboard.writeText('elijahgeduldig@gmail.com');window.location.href='mailto:elijahgeduldig@gmail.com';void Promise.resolve().then(()=>{const t=this.querySelector('.copy-tip');t.style.opacity='1';t.style.transform='translateX(-50%) translateY(-4px)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(4px)'},1200)})"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px;"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>elijahgeduldig@gmail.com<span class="copy-tip" style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--dark-green);color:#fff;font-size:9px;padding:3px 7px;letter-spacing:0.08em;white-space:nowrap;opacity:0;transition:opacity 0.2s ease,transform 0.2s ease;pointer-events:none;">Copied!</span></span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end rp -->
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function slowScroll(panel, distance, duration) {
+    const start = panel.scrollTop;
+    const startTime = performance.now();
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      panel.scrollTop = start + distance * ease;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const track = document.getElementById('track');
+  const tabs = [document.getElementById('tab0'), document.getElementById('tab1'), document.getElementById('tab2')];
+  const nav = document.querySelector('nav');
+  let currentPanel = 0;
+  const totalPanels = 4;
+  let wheelAccum = 0;
+  let wheelCooldown = false;
+  const musicPanel = document.querySelectorAll('.slide-panel')[3];
+
+  // ── AUDIO SYSTEM (declared early so goTo() can reference them) ──
+  const TRACKS = [
+    { id: 'track-sbiff',     src: '18sbiffsong.wav',  trigger: 'section-sbiff',       name: 'Introduction',             artist: 'Elijah Skye', color: '#1a3a2a' },
+    { id: 'track-youwere',   src: '21ywhsong.wav',    trigger: 'section-youwerehere', name: 'Evangeline',               artist: 'Elijah Skye & Avital Chiara', color: '#7a1f1f' },
+    { id: 'track-morethings',src: '23twbmt.m4a',      trigger: 'section-therewillbe', name: 'There Will Be More Things', artist: 'Elijah Skye', color: '#1a2e4a' },
+  ];
+
+  // SBIFF mini-playlist: Introduction → Major Promotion → loop
+  const SBIFF_PLAYLIST = [
+    { id: 'track-sbiff',  src: '18sbiffsong.wav', name: 'Introduction',    artist: 'Elijah Skye' },
+    { id: 'track-sbiff2', src: '19sbiffsong2.wav', name: 'Major Promotion', artist: 'Elijah Skye' },
+  ];
+  let sbiffSubIdx = 0;
+  let musicEnabled = false;
+  let currentTrackIdx = -1;
+  const FADE_DURATION = 1800;
+
+  TRACKS.forEach(t => {
+    const audio = document.createElement('audio');
+    audio.id = t.id; audio.src = t.src; audio.loop = false;
+    audio.volume = 0; audio.preload = 'none';
+    document.body.appendChild(audio);
+  });
+
+  // Add second SBIFF track
+  const sbiff2 = document.createElement('audio');
+  sbiff2.id = 'track-sbiff2'; sbiff2.src = '19sbiffsong2.wav'; sbiff2.loop = false;
+  sbiff2.volume = 0; sbiff2.preload = 'none';
+  document.body.appendChild(sbiff2);
+
+  // Chain SBIFF tracks
+  function playSbiffSubtrack(idx, vol) {
+    sbiffSubIdx = idx % SBIFF_PLAYLIST.length;
+    const current = document.getElementById(SBIFF_PLAYLIST[sbiffSubIdx].id);
+    const other   = document.getElementById(SBIFF_PLAYLIST[1 - sbiffSubIdx].id);
+    if (other && !other.paused) fadeAudio(other, other.volume, 0, 400, () => { other.pause(); other.currentTime = 0; });
+    if (current) {
+      current.currentTime = 0;
+      current.volume = 0;
+      current.play().catch(() => {});
+      fadeAudio(current, 0, vol || 0.8, 800);
+    }
+    // Update Now Playing
+    const t = SBIFF_PLAYLIST[sbiffSubIdx];
+    TRACKS[0].name = t.name;
+    TRACKS[0].artist = t.artist;
+    updateMusicUI();
+  }
+
+  document.getElementById('track-youwere').addEventListener('ended', () => {
+    if (currentTrackIdx === 1 && musicEnabled) {
+      const a = document.getElementById('track-youwere');
+      if (a) { a.currentTime = 0; a.play().catch(() => {}); }
+    }
+  });
+  document.getElementById('track-morethings').addEventListener('ended', () => {
+    if (currentTrackIdx === 2 && musicEnabled) {
+      const a = document.getElementById('track-morethings');
+      if (a) { a.currentTime = 0; a.play().catch(() => {}); }
+    }
+  });
+  document.getElementById('track-sbiff').addEventListener('ended', () => {
+    if (currentTrackIdx === 0 && musicEnabled) playSbiffSubtrack(1, 0.8);
+  });
+  sbiff2.addEventListener('ended', () => {
+    if (currentTrackIdx === 0 && musicEnabled) playSbiffSubtrack(0, 0.8);
+  });
+
+  function getAudio(idx) { return document.getElementById(TRACKS[idx].id); }
+
+  // Track active fade timers per audio element to cancel them
+  const activeFades = new WeakMap();
+
+  function fadeAudio(audio, fromVol, toVol, duration, onDone) {
+    // Cancel any in-progress fade on this element
+    if (activeFades.has(audio)) clearInterval(activeFades.get(audio));
+    const steps = 40;
+    const interval = duration / steps;
+    const delta = (toVol - fromVol) / steps;
+    let step = 0;
+    audio.volume = fromVol;
+    const timer = setInterval(() => {
+      step++;
+      audio.volume = Math.min(1, Math.max(0, fromVol + delta * step));
+      if (step >= steps) {
+        clearInterval(timer);
+        activeFades.delete(audio);
+        audio.volume = toVol;
+        if (onDone) onDone();
+      }
+    }, interval);
+    activeFades.set(audio, timer);
+    return timer;
+  }
+
+  // ── CANVAS WAVE VISUALIZER ──
+  const TRACK_WAVES = {
+    '#1a3a2a': [
+      { r:34,  g:110, b:72,  a:0.28, speed:0.00032, amp:0.16, freq:1.3, off:0.0 },
+      { r:20,  g:70,  b:48,  a:0.09, speed:0.00051, amp:0.10, freq:2.2, off:2.1 },
+      { r:60,  g:130, b:90,  a:0.13, speed:0.00023, amp:0.20, freq:0.7, off:4.4 },
+      { r:15,  g:50,  b:38,  a:0.09, speed:0.00068, amp:0.07, freq:3.1, off:1.7 },
+      { r:90,  g:160, b:115, a:0.09, speed:0.00017, amp:0.25, freq:0.4, off:3.8 },
+    ],
+    '#7a1f1f': [
+      { r:180, g:60,  b:60,  a:0.28, speed:0.00032, amp:0.16, freq:1.3, off:0.0 },
+      { r:140, g:40,  b:40,  a:0.09, speed:0.00051, amp:0.10, freq:2.2, off:2.1 },
+      { r:200, g:100, b:80,  a:0.13, speed:0.00023, amp:0.20, freq:0.7, off:4.4 },
+      { r:120, g:30,  b:30,  a:0.09, speed:0.00068, amp:0.07, freq:3.1, off:1.7 },
+      { r:220, g:140, b:120, a:0.09, speed:0.00017, amp:0.25, freq:0.4, off:3.8 },
+    ],
+    '#1a2e4a': [
+      { r:50,  g:100, b:170, a:0.28, speed:0.00028, amp:0.18, freq:1.1, off:0.0 },
+      { r:30,  g:75,  b:140, a:0.09, speed:0.00045, amp:0.12, freq:1.9, off:1.8 },
+      { r:80,  g:140, b:200, a:0.13, speed:0.00021, amp:0.22, freq:0.6, off:3.9 },
+      { r:20,  g:55,  b:115, a:0.09, speed:0.00062, amp:0.08, freq:2.8, off:1.4 },
+      { r:115, g:165, b:225, a:0.09, speed:0.00015, amp:0.28, freq:0.35,off:3.2 },
+    ],
+  };
+
+  let vizCanvas = null, vizCtx = null, vizRaf = null;
+  let vizAlpha = 0, vizTarget = 0, vizWaves = TRACK_WAVES['#1a3a2a'], vizScrollFade = 1;
+  let lastScrollTop = 0, scrollDir = 1;
+
+  function initViz() {
+    if (vizCanvas) return;
+    vizCanvas = document.createElement('canvas');
+    vizCanvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;opacity:0;z-index:9;display:block;';
+    document.body.appendChild(vizCanvas);
+    vizCanvas.width  = window.innerWidth;
+    vizCanvas.height = window.innerHeight;
+    window.addEventListener('resize', () => {
+      vizCanvas.width  = window.innerWidth;
+      vizCanvas.height = window.innerHeight;
+    });
+    requestAnimationFrame(animateViz);
+  }
+
+  // Bar heights with independent oscillators per bar
+  let vizBars = null;
+  function initBars(count) {
+    vizBars = Array.from({length: count}, (_, i) => ({
+      phase:  Math.random() * Math.PI * 2,
+      speed:  0.0004 + Math.random() * 0.0006,   // each bar drifts at own speed
+      height: 0.08 + Math.random() * 0.28,        // max height fraction of H/2
+      phase2: Math.random() * Math.PI * 2,
+      speed2: 0.0002 + Math.random() * 0.0003,
+    }));
+  }
+
+  function animateViz() {
+    requestAnimationFrame(animateViz);
+    if (!vizCanvas || !vizCtx) { if (vizCanvas) vizCtx = vizCanvas.getContext('2d'); return; }
+    const W = vizCanvas.width, H = vizCanvas.height;
+    const t = performance.now();
+
+    const step = 0.012;
+    vizAlpha += vizAlpha < vizTarget ? step : vizAlpha > vizTarget ? -step : 0;
+    vizAlpha  = Math.min(vizTarget, Math.max(0, vizAlpha));
+    vizCanvas.style.opacity = vizAlpha * vizScrollFade;
+
+    vizCtx.clearRect(0, 0, W, H);
+    if (vizAlpha < 0.002) return;
+
+    const panelEl = document.getElementById('musician-panel');
+    if (!panelEl) return;
+    const rect = panelEl.getBoundingClientRect();
+    if (rect.width < 1) return;
+
+    const BAR_COUNT = 80;
+    if (!vizBars || vizBars.length !== BAR_COUNT) initBars(BAR_COUNT);
+
+    const wv = vizWaves[0];
+    const barW = rect.width / BAR_COUNT;
+    const centerY = rect.top + rect.height * 0.5;
+
+    // Draw bars clipped to panel
+    vizCtx.save();
+    vizCtx.beginPath();
+    vizCtx.rect(rect.left, rect.top, rect.width, rect.height);
+    vizCtx.clip();
+
+    for (let i = 0; i < BAR_COUNT; i++) {
+      const b = vizBars[i];
+      const hRaw = rect.height * 0.42 * (
+        b.height * (0.5 + 0.5 * Math.sin(t * b.speed + b.phase)) +
+        b.height * 0.4 * (0.5 + 0.5 * Math.sin(t * b.speed2 + b.phase2))
+      );
+      const h = Math.max(hRaw, 4);
+      const x = rect.left + i * barW;
+      const gap = barW * 0.18;
+      const grad = vizCtx.createLinearGradient(x, centerY - h, x, centerY + h);
+      grad.addColorStop(0,   `rgba(${wv.r},${wv.g},${wv.b},0)`);
+      grad.addColorStop(0.3, `rgba(${wv.r},${wv.g},${wv.b},${wv.a * 0.9})`);
+      grad.addColorStop(0.5, `rgba(${wv.r},${wv.g},${wv.b},${wv.a})`);
+      grad.addColorStop(0.7, `rgba(${wv.r},${wv.g},${wv.b},${wv.a * 0.9})`);
+      grad.addColorStop(1,   `rgba(${wv.r},${wv.g},${wv.b},0)`);
+      vizCtx.fillStyle = grad;
+      vizCtx.beginPath();
+      vizCtx.roundRect(x + gap, centerY - h, barW - gap * 2, h * 2, 2);
+      vizCtx.fill();
+    }
+
+    // Only draw bars in the left and right margin strips — clear the center content area
+    const rpInner = panelEl.querySelector('.rp-inner');
+    if (rpInner) {
+      const inner = rpInner.getBoundingClientRect();
+      // Left strip: panel left → rp-inner left
+      // Right strip: rp-inner right → panel right
+      // Clear everything between those two strips
+      vizCtx.globalCompositeOperation = 'destination-out';
+      vizCtx.fillStyle = 'rgba(0,0,0,1)';
+      vizCtx.fillRect(inner.left, rect.top, inner.width, rect.height);
+      vizCtx.globalCompositeOperation = 'source-over';
+    } else {
+      // Fallback: clear center 80%
+      vizCtx.globalCompositeOperation = 'destination-out';
+      vizCtx.fillStyle = 'rgba(0,0,0,1)';
+      const pad = rect.width * 0.1;
+      vizCtx.fillRect(rect.left + pad, rect.top, rect.width - pad * 2, rect.height);
+      vizCtx.globalCompositeOperation = 'source-over';
+    }
+    vizCtx.restore();
+  }
+
+  function transitionPanelBg(trackColor) {
+    if (trackColor && TRACK_WAVES[trackColor]) {
+      // Crossfade wave colors smoothly
+      const newWaves = TRACK_WAVES[trackColor];
+      if (vizWaves && vizTarget > 0) {
+        const start = performance.now();
+        const oldWaves = vizWaves.map(w => ({...w}));
+        const duration = 800;
+        function crossfade() {
+          const p = Math.min(1, (performance.now() - start) / duration);
+          const ease = p < 0.5 ? 2*p*p : -1+(4-2*p)*p;
+          vizWaves = oldWaves.map((ow, i) => ({
+            ...newWaves[i],
+            r: Math.round(ow.r + (newWaves[i].r - ow.r) * ease),
+            g: Math.round(ow.g + (newWaves[i].g - ow.g) * ease),
+            b: Math.round(ow.b + (newWaves[i].b - ow.b) * ease),
+          }));
+          if (p < 1) requestAnimationFrame(crossfade);
+          else vizWaves = newWaves;
+        }
+        requestAnimationFrame(crossfade);
+      } else {
+        vizWaves = newWaves;
+      }
+      vizTarget = 1;
+      initViz();
+      // Transparent canvas — bars float over the cream page
+      if (vizCanvas) vizCanvas.style.backgroundColor = 'transparent';
+    } else {
+      vizTarget = 0;
+      initViz();
+      if (vizCanvas) vizCanvas.style.backgroundColor = 'transparent';
+    }
+    const panel = document.getElementById('musician-panel');
+    const isActive = !!trackColor;
+    if (panel) {
+      // Keep cream — no background or text changes at all
+      isActive ? panel.classList.add('listening') : panel.classList.remove('listening');
+    }
+  }
+
+
+  function switchToTrack(idx) {
+    if (!musicEnabled) return;
+    if (idx === currentTrackIdx) return;
+    const prev = currentTrackIdx;
+    currentTrackIdx = idx;
+    if (prev >= 0) {
+      const prevAudio = getAudio(prev);
+      fadeAudio(prevAudio, prevAudio.volume, 0, FADE_DURATION, () => prevAudio.pause());
+    }
+    const nextAudio = getAudio(idx);
+    nextAudio.volume = 0;
+    const playPromise = nextAudio.play();
+    if (playPromise) playPromise.then(() => fadeAudio(nextAudio, 0, 0.8, FADE_DURATION)).catch(() => {});
+  }
+
+  function toggleMusic() {
+    musicEnabled = !musicEnabled;
+    if (musicEnabled) {
+      TRACKS.forEach(t => { const a = document.getElementById(t.id); if(a) a.preload = 'auto'; });
+      // Pick track based on scroll position (same 30% trigger logic)
+      const triggerLine = musicPanel.scrollTop + musicPanel.clientHeight * 0.70;
+      let startIdx = 0;
+      for (let i = TRACKS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(TRACKS[i].trigger);
+        if (el && el.offsetTop <= triggerLine) { startIdx = i; break; }
+      }
+      currentTrackIdx = startIdx;
+      const audio = getAudio(startIdx);
+      if (audio) { audio.volume = 0; audio.play().catch(()=>{}); fadeAudio(audio, 0, 0.8, 800); }
+      transitionPanelBg(TRACKS[startIdx].color);
+    } else {
+      if (currentTrackIdx >= 0) { const a = getAudio(currentTrackIdx); if(a) fadeAudio(a, a.volume, 0, 600, ()=>a.pause()); }
+      currentTrackIdx = -1;
+      transitionPanelBg(null);
+    }
+    updateMusicUI();
+  }
+
+  function updateNav(i) {
+    if (i === 0) {
+      nav.style.background = 'rgba(26,58,42,0.72)';
+      nav.style.borderBottom = 'none';
+      document.querySelector('.nav-logo').style.color = 'rgba(255,255,255,0.9)';
+      tabs.forEach(t => { t.style.color = 'rgba(255,255,255,0.8)'; });
+    } else {
+      nav.style.background = 'rgba(245,240,232,0.95)';
+      nav.style.borderBottom = '1px solid rgba(26,58,42,0.08)';
+      document.querySelector('.nav-logo').style.color = '#1c1c1c';
+      tabs.forEach(t => { t.style.color = '#1c1c1c'; });
+    }
+  }
+
+  function goTo(i) {
+    currentPanel = i;
+    track.style.transform = `translateX(-${(i / 4) * 100}%)`;
+    tabs.forEach((t, idx) => t.classList.toggle('active', idx === i - 1));
+    updateNav(i);
+    if (musicEnabled && currentTrackIdx >= 0) {
+      const audio = document.getElementById(TRACKS[currentTrackIdx].id);
+      if (audio) {
+        if (i !== 3) {
+          fadeAudio(audio, audio.volume, 0, 800, () => audio.pause());
+        } else {
+          audio.play().catch(() => {});
+          fadeAudio(audio, 0, 0.8, 800);
+        }
+      }
+    }
+    updateStickyBtn();
+    if (i === 3) setTimeout(updateStickyBtn, 700);
+    if (i === 0) {
+      wheelAccum = 0; wheelCooldown = false;
+      const headline = document.querySelector('.home-headline');
+      if (headline) { headline.style.opacity = '1'; headline.querySelectorAll('span').forEach(s => s.style.opacity = '1'); }
+      const footer = document.querySelector('.home-footer-bar');
+      if (footer) footer.style.opacity = '1';
+    }
+    if (i === 1) {
+      const vid = document.querySelector('.researcher-hero-video');
+      if (vid) vid.play();
+      setTimeout(() => {
+        const hero = document.querySelector('.researcher-hero-content');
+        if (hero) hero.style.opacity = '1';
+      }, 50);
+    }
+    // Lazy-load videos in the panel being navigated to (exclude tawonga-vid, handled by IntersectionObserver)
+    const panel = document.querySelectorAll('.slide-panel')[i];
+    if (panel) {
+      panel.querySelectorAll('video').forEach(v => {
+        if (v.id === 'tawonga-vid') return;
+        if (v.preload === 'none' || v.readyState === 0) {
+          v.load();
+          v.play().catch(() => {});
+        }
+      });
+    }
+  }
+
+  function goToPanel(i) {
+    goTo(Math.max(0, Math.min(totalPanels - 1, i)));
+  }
+
+  goTo(0);
+
+  // ── ARROW KEY NAVIGATION ──
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') goToPanel(currentPanel + 1);
+    if (e.key === 'ArrowLeft')  goToPanel(currentPanel - 1);
+  });
+
+  // ── SCROLL NAVIGATION ──
+  let atBottomTimer = null;
+  let atTopTimer = null;
+  let readyToAdvance = false;
+  let readyToGoBack = false;
+
+  function blockMomentum(panelIndex) {
+    const panel = document.querySelectorAll('.slide-panel')[panelIndex];
+    if (!panel) return;
+    panel.style.overflow = 'hidden';
+    setTimeout(() => { panel.style.overflow = 'auto'; }, 900);
+  }
+
+  window.addEventListener('wheel', (e) => {
+    if (wheelCooldown) return;
+
+    const panel = document.querySelectorAll('.slide-panel')[currentPanel];
+    const atTop = !panel || panel.scrollTop <= 0;
+    const atBottom = !panel || panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 10;
+
+    // ── Scroll down ──
+    if (e.deltaY > 0) {
+      if (!atBottom) { readyToAdvance = false; wheelAccum = 0; return; }
+
+      // Start a short timer when first hitting the bottom
+      if (!readyToAdvance) {
+        if (!atBottomTimer) {
+          atBottomTimer = setTimeout(() => { readyToAdvance = true; atBottomTimer = null; }, currentPanel === 0 ? 200 : 400);
+        }
+        return;
+      }
+
+      // Only accumulate once readyToAdvance
+      wheelAccum += e.deltaY;
+      if (wheelAccum > (currentPanel === 0 ? 300 : 600) && currentPanel < totalPanels - 1) {
+        wheelCooldown = true;
+        wheelAccum = 0;
+        readyToAdvance = false;
+        const next = currentPanel + 1;
+        goToPanel(next);
+        blockMomentum(next);
+        setTimeout(() => { wheelCooldown = false; wheelAccum = 0; }, 1000);
+      }
+      return;
+    }
+
+    // ── Scroll up ──
+    if (e.deltaY < 0) {
+      readyToAdvance = false;
+      clearTimeout(atBottomTimer);
+      atBottomTimer = null;
+      if (!atTop) { wheelAccum = 0; readyToGoBack = false; clearTimeout(atTopTimer); atTopTimer = null; return; }
+      if (currentPanel === 0) { wheelAccum = 0; return; }
+
+      if (!readyToGoBack) {
+        if (!atTopTimer) {
+          atTopTimer = setTimeout(() => { readyToGoBack = true; atTopTimer = null; }, 400);
+        }
+        return;
+      }
+
+      wheelAccum += e.deltaY;
+      if (wheelAccum < -1800) {
+        wheelCooldown = true;
+        wheelAccum = 0;
+        readyToGoBack = false;
+        const prev = currentPanel - 1;
+        goToPanel(prev);
+        setTimeout(() => { wheelCooldown = false; wheelAccum = 0; }, 1000);
+      }
+      return;
+    }
+
+    wheelAccum = 0;
+  }, { passive: true });
+
+  // ── TWO-FINGER HORIZONTAL SWIPE ──
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartTime = 0;
+  let isTwoFingerTouch = false;
+
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      isTwoFingerTouch = true;
+      touchStartX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      touchStartY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      touchStartTime = Date.now();
+    } else {
+      isTwoFingerTouch = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isTwoFingerTouch || e.touches.length < 2 || wheelCooldown) return;
+    const x = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const y = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    const dx = x - touchStartX;
+    const dy = y - touchStartY;
+    const elapsed = Date.now() - touchStartTime;
+    if (elapsed < 500 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      isTwoFingerTouch = false;
+      if (dx < 0) goToPanel(currentPanel + 1);
+      else goToPanel(currentPanel - 1);
+      wheelCooldown = true;
+      setTimeout(() => { wheelCooldown = false; }, 800);
+    }
+  }, { passive: true });
+  window.addEventListener('load', () => {
+    document.querySelectorAll('video').forEach(v => {
+      if (v.id !== 'tawonga-vid') v.play().catch(() => {});
+    });
+  });
+  document.querySelectorAll('video').forEach(v => {
+    if (v.id !== 'tawonga-vid') {
+      v.addEventListener('suspend', () => v.play().catch(() => {}));
+      v.addEventListener('pause', () => v.play().catch(() => {}));
+    }
+  });
+
+  // Only observe inside the researcher slide panel, never touch the home panel
+  const researcherPanel = document.querySelectorAll('.slide-panel')[1];
+  const fadeEls = researcherPanel.querySelectorAll(
+    '.cred-strip, .thesis-feature, .role-block, .paper-row, .section-rule'
+  );
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { root: researcherPanel, threshold: 0.08 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // ── MUSIC SCROLL LISTENER + STICKY BUTTON ──
+
+  // ── MUSIC UI UPDATE ──
+
+  function animateTrackChange(newHTML) {
+    const track = document.getElementById('music-fixed-track');
+    if (!track || !track.style.display || track.style.display === 'none') {
+      if (track) { track.innerHTML = newHTML; track.style.display = 'block'; }
+      return;
+    }
+    // Direction: scrolling down = old slides left, new from right
+    //            scrolling up   = old slides right, new from left
+    const outClass = scrollDir >= 0 ? 'track-slide-out-left'  : 'track-slide-out-right';
+    const inClass  = scrollDir >= 0 ? 'track-slide-in-right'  : 'track-slide-in-left';
+    track.classList.add(outClass);
+    setTimeout(() => {
+      track.innerHTML = newHTML;
+      track.classList.remove(outClass);
+      track.classList.add(inClass);
+      setTimeout(() => track.classList.remove(inClass), 300);
+    }, 220);
+  }
+  function updateMusicUI() {
+    const playing = musicEnabled;
+    const t = playing && currentTrackIdx >= 0 ? TRACKS[currentTrackIdx] : null;
+    const trackHTML = t ? `${t.name} <span style="font-size:0.7rem;opacity:0.7;">— ${t.artist}</span>` : '';
+
+    // Update both buttons
+    ['btn', 'fixed'].forEach(prefix => {
+      const icon  = document.getElementById(`music-${prefix}-icon`);
+      const label = document.getElementById(`music-${prefix}-label`);
+      const track = document.getElementById(`music-${prefix}-track`);
+      const btn   = document.getElementById(prefix === 'btn' ? 'music-listen-btn' : 'music-fixed-btn');
+      if (!btn) return;
+      if (icon)  icon.innerHTML = playing ? '<span style="display:inline-flex;gap:3px;"><span style="display:inline-block;width:4px;height:12px;background:currentColor;"></span><span style="display:inline-block;width:4px;height:12px;background:currentColor;"></span></span>' : '&#9834;';
+      if (label) label.textContent = playing ? 'NOW PLAYING' : 'ENTER LISTENING MODE';
+      if (prefix === 'btn') {
+        btn.style.color       = playing ? '#f5f0e8' : 'var(--dark-green)';
+        btn.style.background  = playing ? 'rgba(26,58,42,0.88)' : 'rgba(245,240,232,0.9)';
+        btn.style.borderColor = playing ? 'transparent' : 'rgba(26,58,42,0.25)';
+      } else {
+        btn.style.color       = playing ? '#f5f0e8' : 'var(--dark-green)';
+        btn.style.background  = playing ? 'rgba(26,58,42,0.88)' : 'rgba(245,240,232,0.9)';
+        btn.style.borderColor = playing ? 'transparent' : 'rgba(26,58,42,0.25)';
+      }
+      // Track name: animate slide for fixed button, instant for in-page button
+      if (track) {
+        if (prefix === 'fixed' && playing && trackHTML) {
+          const hasContent = track.textContent.trim().length > 0;
+          if (hasContent) {
+            animateTrackChange(trackHTML);
+          } else {
+            track.innerHTML = trackHTML;
+            track.style.display = 'block';
+          }
+        } else {
+          track.innerHTML = trackHTML;
+          track.style.display = trackHTML ? 'block' : 'none';
+        }
+      }
+    });
+  }
+
+  // ── STICKY BUTTON ──
+  function updateStickyBtn() {
+    const inPage = document.getElementById('music-listen-btn');
+    const fixed  = document.getElementById('music-fixed-btn');
+    if (!inPage || !fixed) return;
+    if (currentPanel !== 3) {
+      fixed.style.display = 'none';
+      inPage.style.visibility = 'visible';
+      return;
+    }
+    const rect = inPage.getBoundingClientRect();
+    const show = rect.top < 77;
+    fixed.style.display     = show ? 'inline-flex' : 'none';
+    inPage.style.visibility = show ? 'hidden' : 'visible';
+  }
+
+  musicPanel.addEventListener('scroll', () => {
+    scrollDir = musicPanel.scrollTop > lastScrollTop ? 1 : -1;
+    lastScrollTop = musicPanel.scrollTop;
+    updateStickyBtn();
+
+    // Fade visualizer based on scroll position — hide when near hero
+    const heroHeight = musicPanel.clientHeight;
+    vizScrollFade = Math.min(1, Math.max(0, (musicPanel.scrollTop - heroHeight * 0.6) / (heroHeight * 0.3)));
+
+    if (!musicEnabled) return;
+    // Fire when a section's top edge crosses 70% down the visible panel
+    // (i.e. you've scrolled past it meaningfully before the track switches)
+    const triggerLine = musicPanel.scrollTop + musicPanel.clientHeight * 0.70;
+    let activeIdx = 0;
+    for (let i = TRACKS.length - 1; i >= 0; i--) {
+      const el = document.getElementById(TRACKS[i].trigger);
+      if (el && el.offsetTop <= triggerLine) { activeIdx = i; break; }
+    }
+    if (activeIdx === currentTrackIdx) return;
+    currentTrackIdx = activeIdx;
+    // Fade out all other tracks (fadeAudio cancels any existing fade automatically)
+    TRACKS.forEach((t, i) => {
+      if (i === activeIdx) return;
+      const a = getAudio(i);
+      if (a && !a.paused) fadeAudio(a, a.volume, 0, 600, () => a.pause());
+    });
+    // Also stop sbiff2 if leaving SBIFF section
+    if (activeIdx !== 0 && sbiff2 && !sbiff2.paused) fadeAudio(sbiff2, sbiff2.volume, 0, 600, () => { sbiff2.pause(); sbiff2.currentTime = 0; });
+    // Fade in new track
+    if (activeIdx === 0) {
+      sbiffSubIdx = 0;
+      playSbiffSubtrack(0, 0.8);
+    } else {
+      const next = getAudio(activeIdx);
+      if (next) {
+        next.volume = 0;
+        next.play().catch(() => {});
+        fadeAudio(next, 0, 0.8, 800);
+      }
+    }
+    transitionPanelBg(TRACKS[activeIdx].color);
+    updateMusicUI();
+  });
+
+  const musicFadeEls = musicPanel.querySelectorAll(
+    '.section-rule, .role-block, .music-fade-el, #section-youwerehere, #section-therewillbe, .broadcast-section .role-block'
+  );
+  musicFadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  const musicObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        musicObserver.unobserve(entry.target);
+      }
+    });
+  }, { root: musicPanel, threshold: 0.08 });
+  musicFadeEls.forEach(el => musicObserver.observe(el));
+
+  const peoplePanel = document.querySelectorAll('.slide-panel')[2];
+  const allPeopleFade = peoplePanel.querySelectorAll(
+    '.people-fade, .role-block, .section-rule, .role-block img'
+  );
+  const peopleFadeEls = Array.from(allPeopleFade);
+  peopleFadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  });
+  const peopleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        peopleObserver.unobserve(entry.target);
+      }
+    });
+  }, { root: peoplePanel, threshold: 0.08 });
+  peopleFadeEls.forEach(el => peopleObserver.observe(el));
+
+  // Both buttons use onclick="toggleMusic()" directly — no addEventListener needed
+</script>
+
+
+  <!-- ── FIXED MUSIC BUTTON ── -->
+  <button id="music-fixed-btn" onclick="toggleMusic()">
+    <span id="music-fixed-icon" style="font-size:1rem;line-height:1;">&#9834;</span>
+    <span style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;text-align:center;">
+      <span id="music-fixed-label">ENTER LISTENING MODE</span>
+      <span id="music-fixed-track" style="font-family:'Playfair Display',serif;font-style:italic;font-size:0.82rem;text-transform:none;letter-spacing:0;display:none;"></span>
+    </span>
+  </button>
+
+</body>
+</html>
