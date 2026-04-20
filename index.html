@@ -473,7 +473,9 @@ nav {
     <div class="slide-panel">
       <div class="rp" style="padding-bottom:0;">
         <div class="researcher-hero">
-          <video class="researcher-hero-video" autoplay muted loop playsinline preload="none" data-src="1" src="2sunsetvid.MOV" id="researcherVid"></video>
+          <video class="researcher-hero-video" autoplay muted loop playsinline preload="none" data-src="1" id="researcherVid">
+            <source src="2sunsetvid.mp4" type="video/mp4">
+          </video>
           <div class="researcher-hero-gradient"></div>
           <div class="researcher-hero-content">
             <div style="display:flex;align-items:flex-end;gap:32px;">
@@ -763,16 +765,16 @@ nav {
         <!-- Camp Tawonga sticky video + role blocks (one at a time) -->
         <div id="tawonga-outer" style="height:250vh;">
           <div style="position:sticky;top:0;height:calc(100vh - 65px);display:grid;background:#1a1a1a;">
-            <video id="tawonga-vid" muted loop playsinline preload="metadata" poster="12tawongavid.MOV" style="grid-area:1/1;width:100%;height:100%;object-fit:cover;filter:brightness(0.78);opacity:0;transition:opacity 1.6s ease;">
-              <source src="12tawongavid.MOV">
+            <video id="tawonga-vid" muted loop playsinline preload="metadata" style="grid-area:1/1;width:100%;height:100%;object-fit:cover;filter:brightness(0.78);opacity:0;transition:opacity 1.6s ease;">
+              <source src="12tawongavid.mp4" type="video/mp4">
             </video>
             <div style="grid-area:1/1;background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,0.45) 100%);"></div>
             <!-- Counselor block -->
             <div id="tawonga-block-1" style="grid-area:1/1;align-self:center;justify-self:stretch;z-index:2;opacity:0;padding:0 48px;transition:opacity 0.5s ease;">
               <div style="max-width:1200px;margin:0 auto;">
-                <div class="role-block" style="margin:0;border:none;">
-                  <img src="13counselor.jpg" style="width:100%;height:100%;object-fit:contain;object-position:center;background:#1a1a1a;display:block;min-height:160px;">
-                  <div class="role-text" style="background:rgba(0,0,0,0.55);padding:24px 32px;backdrop-filter:blur(2px);">
+                <div class="role-block" style="margin:0;border:none;gap:2px;">
+                  <img src="13counselor.jpg" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;min-height:160px;">
+                  <div class="role-text" style="background:rgba(0,0,0,0.6);padding:24px 32px;backdrop-filter:blur(2px);">
                     <div class="role-year-badge" style="color:rgba(245,240,232,0.6);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Jun 2023 – Aug 2024</div>
                     <div class="role-badge" style="color:#ffffff;text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Counselor</div>
                     <div class="role-org" style="color:#f5f0e8;text-shadow:0 1px 8px rgba(0,0,0,0.85), 0 3px 24px rgba(0,0,0,0.6);">Camp Tawonga</div>
@@ -785,9 +787,9 @@ nav {
             <!-- TLI block -->
             <div id="tawonga-block-2" style="grid-area:1/1;align-self:center;justify-self:stretch;z-index:2;opacity:0;padding:0 48px;transition:opacity 0.5s ease;">
               <div style="max-width:1200px;margin:0 auto;">
-                <div class="role-block flip" style="margin:0;border:none;">
-                  <img src="14tli.jpg" style="width:100%;height:100%;object-fit:contain;object-position:center;background:#1a1a1a;display:block;min-height:160px;">
-                  <div class="role-text" style="background:rgba(0,0,0,0.55);padding:24px 32px;backdrop-filter:blur(2px);">
+                <div class="role-block flip" style="margin:0;border:none;gap:2px;">
+                  <img src="14tli.jpg" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;min-height:160px;">
+                  <div class="role-text" style="background:rgba(0,0,0,0.6);padding:24px 32px;backdrop-filter:blur(2px);">
                     <div class="role-year-badge" style="color:rgba(245,240,232,0.6);text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Jul 2025 – Aug 2025</div>
                     <div class="role-badge" style="color:#ffffff;text-shadow:0 1px 8px rgba(0,0,0,0.75), 0 2px 20px rgba(0,0,0,0.5);">Teen Leadership Institute: Environment and Leadership Facilitator</div>
                     <div class="role-org" style="color:#f5f0e8;text-shadow:0 1px 8px rgba(0,0,0,0.85), 0 3px 24px rgba(0,0,0,0.6);">Camp Tawonga</div>
@@ -1140,7 +1142,7 @@ nav {
                 <div style="font-size:13px;color:var(--dark-green);font-family:'Georgia',serif;">Live on KCSB 91.9 FM &nbsp;·&nbsp; May 16, 2026</div>
               </div>
             </div>
-            <img src="24twbmt.PNG" style="width:100%;height:100%;object-fit:contain;background:var(--cream);display:block;min-height:260px;">
+            <img src="24twbmt.PNG" style="width:100%;height:100%;object-fit:contain;background:var(--cream);display:block;min-height:260px;padding:16px;">
           </div>
 
           <div style="height:1px;background:rgba(26,58,42,0.1);margin-bottom:72px;"></div>
@@ -1274,7 +1276,10 @@ nav {
   document.body.appendChild(sbiff2);
 
   // Chain SBIFF tracks
+  let sbiffTransitioning = false;
   function playSbiffSubtrack(idx, vol) {
+    if (sbiffTransitioning) return;
+    sbiffTransitioning = true;
     sbiffSubIdx = idx % SBIFF_PLAYLIST.length;
     const current = document.getElementById(SBIFF_PLAYLIST[sbiffSubIdx].id);
     const other   = document.getElementById(SBIFF_PLAYLIST[1 - sbiffSubIdx].id);
@@ -1283,7 +1288,9 @@ nav {
       current.currentTime = 0;
       current.volume = 0;
       current.play().catch(() => {});
-      fadeAudio(current, 0, vol || 0.8, 800);
+      fadeAudio(current, 0, vol || 0.8, 800, () => { sbiffTransitioning = false; });
+    } else {
+      sbiffTransitioning = false;
     }
     // Update Now Playing
     const t = SBIFF_PLAYLIST[sbiffSubIdx];
@@ -1871,6 +1878,7 @@ nav {
     });
     // Also stop sbiff2 if leaving SBIFF section
     if (activeIdx !== 0 && sbiff2 && !sbiff2.paused) fadeAudio(sbiff2, sbiff2.volume, 0, 600, () => { sbiff2.pause(); sbiff2.currentTime = 0; });
+    if (activeIdx !== 0) sbiffTransitioning = false;
     // Fade in new track
     if (activeIdx === 0) {
       sbiffSubIdx = 0;
