@@ -25,6 +25,18 @@
 html, body { height: 100%; overflow: hidden; }
 body { background: #000; color: var(--text-dark); font-family: 'DM Sans', sans-serif; }
 
+/* ── MOBILE OVERLAY ── */
+#mobile-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--dark-green);
+  flex-direction: column; align-items: center; justify-content: center;
+  padding: 48px 32px; text-align: center;
+}
+@media (max-width: 900px) {
+  #mobile-overlay { display: flex; }
+}
+
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -437,6 +449,13 @@ nav {
 </head>
 <body>
 
+<!-- ── MOBILE OVERLAY ── -->
+<div id="mobile-overlay">
+  <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:2rem;color:#f5f0e8;margin-bottom:24px;line-height:1.2;">Elijah Geduldig</p>
+  <p style="font-family:'Lora',serif;font-style:italic;font-size:1.1rem;color:rgba(245,240,232,0.8);margin-bottom:32px;line-height:1.7;">This site is designed for desktop and isn't quite ready for mobile yet.</p>
+  <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(245,240,232,0.5);font-family:'DM Sans',sans-serif;">Visit elijahgeduldig.com on a computer for the full experience, or expand your browser window</p>
+</div>
+
 <nav>
   <span class="nav-logo" onclick="goTo(0)">Elijah Geduldig</span>
   <ul class="nav-links">
@@ -767,7 +786,7 @@ nav {
 
         <!-- Camp Tawonga sticky video + role blocks (one at a time) -->
         <div id="tawonga-outer" style="height:250vh;">
-          <div style="position:sticky;top:0;height:calc(100vh - 65px);display:grid;background:#1a1a1a;">
+          <div style="position:sticky;top:0;height:calc(100dvh - 65px);display:grid;background:#1a1a1a;">
             <video id="tawonga-vid" muted loop playsinline preload="metadata" style="grid-area:1/1;width:100%;height:100%;object-fit:cover;filter:brightness(0.78);opacity:0;transition:opacity 1.6s ease;">
               <source src="12tawongavid.mp4" type="video/mp4">
             </video>
