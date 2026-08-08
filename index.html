@@ -33,18 +33,6 @@
 html, body { height: 100%; overflow: hidden; }
 body { background: #000; color: var(--text-dark); font-family: 'DM Sans', sans-serif; }
 
-/* ── MOBILE OVERLAY ── */
-#mobile-overlay {
-  display: none;
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--dark-green);
-  flex-direction: column; align-items: center; justify-content: center;
-  padding: 48px 32px; text-align: center;
-}
-@media (max-width: 900px) {
-  #mobile-overlay { display: flex; }
-}
-
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -453,16 +441,201 @@ nav {
   color: #f5f0e8;
   border-color: transparent;
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE — mobile / small screens
+   Every rule below sits inside a max-width media query, so anything wider
+   than 900px renders byte-for-byte as it did before.
+
+   Breakpoints
+     ≤ 900px   tablet + phone — single-column stacking, tighter gutters
+     ≤ 620px   phone — nav and type step down again
+     ≤ 430px   small phone — nav wordmark collapses to "EG"
+
+   The nav deliberately keeps its 65px min-height on mobile so that every
+   existing "- 65px" calculation in this file stays correct.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+
+  /* ── VIEWPORT HEIGHT ───────────────────────────────────────────────────
+     iOS resolves 100vh (and `fixed` + `bottom:0`) against the LARGE viewport,
+     so the bottom of the slider hides behind the URL bar. `svh` is the small
+     viewport — stable, never clipped. The plain vh line is the fallback for
+     browsers without svh. Because body has overflow:hidden the URL bar never
+     collapses, so svh matches what is actually on screen. */
+  .slider-viewport {
+    bottom: auto;
+    height: calc(100vh - 65px);
+    height: calc(100svh - 65px);
+  }
+
+  /* Nothing may push the layout sideways */
+  img, video, iframe { max-width: 100%; }
+
+  /* ── NAV ── */
+  nav { padding: 14px 22px; gap: 16px; }
+  .nav-logo { font-size: 1rem; }
+  .nav-links { gap: 22px; min-width: 0; }
+  .nav-links a { font-size: 0.76rem; letter-spacing: 0.04em; }
+
+  /* ── GUTTERS ── */
+  .rp-inner { padding: 0 24px; }
+  .researcher-hero + div { padding: 18px 24px 40px !important; }          /* intro band under each hero */
+  .researcher-hero + div p { font-size: 0.98rem !important; line-height: 1.75 !important; }
+  .broadcast-section { padding: 48px 24px 0 !important; }
+  .people-panel-inner, .musician-panel-inner { padding: 48px 24px 80px; }
+  div[style*="padding:28px 48px"] { padding-left: 24px !important; padding-right: 24px !important; }
+
+  /* ── PANEL 0 · HOME ── */
+  .home-inner { padding: 0 24px; }
+  .home-left { padding-bottom: 40px; }
+  .home-headline { font-size: clamp(2rem, 6.4vw, 3.4rem); }
+  .home-left p { font-size: 0.95rem !important; margin-top: 20px !important; }
+  .home-footer-bar {
+    flex-direction: column; align-items: flex-start; gap: 10px;
+    padding: 14px 24px 20px; margin: 0 -24px;
+  }
+  .home-footer-links { flex-wrap: wrap; gap: 10px 18px; }
+
+  /* ── HEROES (panels 1–3) ──
+     Height becomes a floor rather than a fixed box so a headline that wraps
+     to two lines can never be clipped. */
+  .researcher-hero {
+    height: auto;
+    min-height: calc(100vh - 220px);
+    min-height: calc(100svh - 220px);
+  }
+  .researcher-hero-content { padding: 0 24px 40px; }
+  .researcher-hero-content > div {                       /* portrait + text row */
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+  }
+  .researcher-hero-content img { width: 116px !important; height: 146px !important; }
+  .researcher-hero-kicker { font-size: 12px; letter-spacing: 0.14em; margin-bottom: 6px; }
+  .researcher-hero-kicker-minor { font-size: 12px; margin-bottom: 14px; }
+  .researcher-hero-headline { font-size: clamp(28px, 7.4vw, 44px); }
+
+  /* ── PANEL 1 · RESEARCH ── */
+  .cred-strip { grid-template-columns: 1fr; margin-bottom: 48px; }
+  .cred-item { padding: 24px 20px; }
+  .cred-divider { height: 1px; }                          /* was a vertical rule */
+  .cred-number { font-size: 42px; }
+
+  .section-rule { margin-bottom: 32px; gap: 12px; }
+  .section-rule-label { font-size: 11px; letter-spacing: 0.14em; white-space: normal; text-align: center; }
+
+  .thesis-feature { grid-template-columns: 1fr; margin-bottom: 48px; }
+  .thesis-aside { order: -1; }
+  .thesis-body { order: 1; border-right: none; padding: 28px 22px; }
+  .thesis-aside img { height: 260px !important; width: 100% !important; }
+  /* meta row: "46 pages | presented at | recognized by" — wrap, drop the 1px rules */
+  .thesis-body > div:nth-of-type(2) { flex-wrap: wrap !important; gap: 16px !important; }
+  .thesis-body > div:nth-of-type(2) > div { flex: 1 1 100% !important; }
+  .thesis-body > div:nth-of-type(2) > div:nth-of-type(2),
+  .thesis-body > div:nth-of-type(2) > div:nth-of-type(4) { display: none !important; }
+  /* tag row was flex-wrap:nowrap and ran off the edge */
+  .thesis-body > div:nth-of-type(3) { flex-wrap: wrap !important; }
+
+  .roles-section { margin-bottom: 48px; }
+  .role-block { grid-template-columns: 1fr !important; direction: ltr !important; min-height: 0; }
+  .role-block.flip { direction: ltr !important; }
+  .role-block--narrow { grid-template-columns: 1fr !important; }
+  .role-block > a,
+  .role-block > div.role-img { order: -1; height: 220px !important; min-height: 220px !important; }
+  /* direct children only — the album-art thumbnails further down are nested
+     inside a .role-block and must keep their natural height */
+  .role-block > img { height: 220px !important; min-height: 220px !important; width: 100% !important; }
+  .role-block > a > img { height: 100% !important; min-height: 0 !important; }
+  .role-text { order: 1; padding: 28px 22px; }
+  .role-desc { font-size: 14px; line-height: 1.75; }
+
+  .paper-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+
+  .page-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .page-footer-links { flex-wrap: wrap; gap: 10px 18px; }
+
+  /* ── PANEL 2 · LEADERSHIP & SUPPORT ── */
+  .people-fade:not(.section-rule) { margin: 0 -24px 48px !important; padding: 40px 24px !important; }
+  .people-fade:not(.section-rule) > div { flex-direction: column !important; gap: 16px !important; }
+  .people-fade:not(.section-rule) p { font-size: 0.98rem !important; line-height: 1.8 !important; }
+  .people-cards { grid-template-columns: 1fr; }
+
+  /* Camp Tawonga — unstick the wheel-driven sequence (see JS guard) and let
+     the video and both role blocks sit in normal document flow. */
+  #tawonga-outer { height: auto !important; }
+  #tawonga-outer > div { position: static !important; display: block !important; height: auto !important; }
+  #tawonga-vid { height: 240px !important; width: 100% !important; opacity: 1 !important; }
+  #tawonga-outer > div > div:nth-of-type(1) { display: none !important; }   /* video gradient */
+  #tawonga-block-1, #tawonga-block-2 { opacity: 1 !important; padding: 24px !important; }
+  #tawonga-block-1 > div > div,
+  #tawonga-block-2 > div > div { backdrop-filter: none !important; padding: 0 !important; }
+  #tawonga-outer > div > div:nth-of-type(4),
+  #tawonga-outer > div > div:nth-of-type(5) { display: none !important; }   /* hairline + scroll cue */
+
+  /* ── PANEL 3 · MUSIC ── */
+  #music-listen-btn { width: min(100%, 420px) !important; height: 64px !important; }
+  #music-fixed-btn { width: calc(100% - 32px); max-width: 420px; height: 64px; padding: 0 16px; }
+  #section-sbiff > div:nth-of-type(2) { grid-template-columns: 1fr !important; gap: 8px !important; }
+  #section-therewillbe { grid-template-columns: 1fr !important; }
+  #section-therewillbe img { height: 240px !important; min-height: 240px !important; }
+  #section-therewillbe .role-text > div:nth-of-type(4) { grid-template-columns: 1fr !important; gap: 20px !important; }
+  #section-therewillbe .role-text > div:nth-of-type(4) > div:nth-of-type(2) { display: none !important; }
+  .track-transition-inner-pad { padding: 48px 0; }
+  .musician-layout { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 620px) {
+  nav { padding: 12px 16px; gap: 12px; }
+  .nav-logo { font-size: 0.95rem; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.02em; }
+
+  .rp-inner { padding: 0 18px; }
+  .researcher-hero + div { padding: 16px 18px 32px !important; }
+  .researcher-hero-content { padding: 0 18px 32px; }
+  .broadcast-section { padding: 36px 18px 0 !important; }
+  .people-panel-inner, .musician-panel-inner { padding: 36px 18px 72px; }
+  div[style*="padding:28px 48px"] { padding-left: 18px !important; padding-right: 18px !important; }
+
+  .home-inner { padding: 0 18px; }
+  .home-headline { font-size: clamp(1.75rem, 7.6vw, 2.6rem); }
+  .home-footer-bar { padding: 12px 18px 18px; margin: 0 -18px; }
+  .home-footer-links a, .home-footer-links span { font-size: 10px; }
+
+  .researcher-hero-headline { font-size: clamp(26px, 8vw, 36px); }
+  .researcher-hero-kicker, .researcher-hero-kicker-minor { font-size: 11px; }
+  .researcher-hero-content img { width: 100px !important; height: 126px !important; }
+
+  .role-text { padding: 24px 18px; }
+  .thesis-body { padding: 24px 18px; }
+  .people-fade:not(.section-rule) { margin: 0 -18px 40px !important; padding: 32px 18px !important; }
+  .people-fade:not(.section-rule) > div > div:first-child { font-size: 3.4rem !important; margin-top: 0 !important; }
+  #tawonga-block-1, #tawonga-block-2 { padding: 18px !important; }
+
+  #music-listen-btn { height: 60px !important; font-size: 0.68rem !important; }
+  #music-fixed-btn { width: calc(100% - 24px); height: 60px; font-size: 0.68rem; }
+}
+
+@media (max-width: 430px) {
+  /* The full wordmark plus three nav links no longer fit on one line, and the
+     nav must stay one line to preserve its 65px height. Swap in the initials
+     used by the favicon. */
+  nav { padding: 12px 14px; gap: 10px; }
+  .nav-logo { font-size: 0; }
+  .nav-logo::after {
+    content: 'EG';
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { gap: 11px; }
+  .nav-links a { font-size: 0.66rem; }
+}
 </style>
 </head>
 <body>
-
-<!-- ── MOBILE OVERLAY ── -->
-<div id="mobile-overlay">
-  <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:2rem;color:#f5f0e8;margin-bottom:24px;line-height:1.2;">Elijah Geduldig</p>
-  <p style="font-family:'Lora',serif;font-style:italic;font-size:1.1rem;color:rgba(245,240,232,0.8);margin-bottom:32px;line-height:1.7;">This site is designed for desktop and isn't quite ready for mobile yet.</p>
-  <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.15em;color:rgba(245,240,232,0.5);font-family:'DM Sans',sans-serif;">Visit elijahgeduldig.com on a computer for the full experience, or expand your browser window</p>
-</div>
 
 <nav>
   <span class="nav-logo" onclick="goTo(0)">Elijah Geduldig</span>
@@ -853,6 +1026,18 @@ nav {
             let state = 0; // 0 = neither, 1 = block1, 2 = block2, 3 = exited
             let cooldown = false;
             const COOLDOWN_MS = 800;
+
+            // ── MOBILE GUARD ──────────────────────────────────────────────
+            // This sequence is driven entirely by `wheel` events, which touch
+            // devices never fire. Left running on a phone it would keep both
+            // blocks at opacity 0 forever and the Tawonga content would be
+            // invisible. Below 900px the CSS un-sticks this section and lays
+            // both blocks out in normal flow, so just reveal them and bail.
+            if (window.matchMedia('(max-width: 900px)').matches) {
+              block1.style.opacity = '1';
+              block2.style.opacity = '1';
+              return;
+            }
 
             function setBlocks(s) {
               block1.style.opacity = s === 1 ? '1' : '0';
