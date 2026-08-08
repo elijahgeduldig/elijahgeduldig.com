@@ -647,8 +647,15 @@ nav {
   #tawonga-outer > div > div:nth-of-type(5) { display: none !important; }   /* hairline + scroll cue */
 
   /* ── PANEL 3 · MUSIC ── */
-  #music-listen-btn { width: min(100%, 420px) !important; height: 64px !important; }
-  #music-fixed-btn { width: calc(100% - 32px); max-width: 420px; height: 64px; padding: 0 16px; }
+  /* Same control in two places, so they must measure the same. The in-page one
+     sits inside .rp-inner's 24px gutter; the fixed one is relative to the
+     viewport, so subtract that gutter explicitly or it renders wider. */
+  #music-listen-btn, #music-fixed-btn {
+    width: calc(100vw - 48px) !important;
+    max-width: 420px !important;
+    height: 64px !important;
+    padding: 0 20px !important;
+  }
   #section-sbiff > div:nth-of-type(2) { grid-template-columns: 1fr !important; gap: 8px !important; }
   #section-therewillbe { grid-template-columns: 1fr !important; }
   #section-therewillbe .role-text > div:nth-of-type(4) { grid-template-columns: 1fr !important; gap: 20px !important; }
@@ -698,8 +705,12 @@ nav {
   #tawonga-block-1 .role-text,
   #tawonga-block-2 .role-text { padding: 20px 15px !important; }
 
-  #music-listen-btn { height: 60px !important; font-size: 0.68rem !important; }
-  #music-fixed-btn { width: calc(100% - 24px); height: 60px; font-size: 0.68rem; }
+  #music-listen-btn, #music-fixed-btn {
+    width: calc(100vw - 36px) !important;   /* .rp-inner gutter is 18px here */
+    height: 60px !important;
+    font-size: 0.68rem !important;
+    padding: 0 16px !important;
+  }
 }
 
 @media (max-width: 430px) {
@@ -1669,6 +1680,33 @@ nav {
     return timer;
   }
 
+  // iOS only permits programmatic playback of a media element that has already
+  // been played once during a user gesture, and it tracks this per element, not
+  // per page. Track changes fire from the scroll handler, which is not a gesture,
+  // so on a phone every song after the first would silently fail to start. Prime
+  // the other tracks here — inside the tap that turns listening mode on — with a
+  // muted play/pause so they are unlocked by the time scrolling reaches them.
+  // (muted is honoured on iOS; volume assignment is not, which is why the fade
+  // helper alone can't do this silently.)
+  function unlockOtherTracks(skipIdx) {
+    const els = TRACKS.map((t, i) => (i === skipIdx ? null : document.getElementById(t.id)));
+    if (sbiff2) els.push(sbiff2);
+    els.forEach(a => {
+      if (!a) return;
+      a.muted = true;
+      const settle = () => {
+        // Don't stop it if the scroll handler already made this the live track.
+        if (a === getAudio(currentTrackIdx)) { a.muted = false; return; }
+        a.pause();
+        try { a.currentTime = 0; } catch (e) {}
+        a.muted = false;
+      };
+      const pr = a.play();
+      if (pr && pr.then) pr.then(settle).catch(() => { a.muted = false; });
+      else settle();
+    });
+  }
+
   // ── CANVAS WAVE VISUALIZER ──
   const TRACK_WAVES = {
     '#1a3a2a': [
@@ -1860,6 +1898,7 @@ nav {
     musicEnabled = !musicEnabled;
     if (musicEnabled) {
       TRACKS.forEach(t => { const a = document.getElementById(t.id); if(a) a.preload = 'auto'; });
+      if (sbiff2) sbiff2.preload = 'auto';
       // Pick track based on scroll position (same 30% trigger logic)
       const triggerLine = musicPanel.scrollTop + musicPanel.clientHeight * 0.70;
       let startIdx = 0;
@@ -1877,6 +1916,7 @@ nav {
       }
       const audio = getAudio(startIdx);
       if (audio) { audio.volume = 0; audio.play().catch(()=>{}); fadeAudio(audio, 0, 0.8, 800); }
+      unlockOtherTracks(startIdx);
       transitionPanelBg(TRACKS[startIdx].color);
     } else {
       if (currentTrackIdx >= 0) { const a = getAudio(currentTrackIdx); if(a) fadeAudio(a, a.volume, 0, 600, ()=>a.pause()); }
