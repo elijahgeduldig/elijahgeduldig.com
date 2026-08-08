@@ -215,8 +215,13 @@ nav {
 .cred-explain { font-size: 10px; color: var(--text-light); line-height: 1.6; text-transform: uppercase; letter-spacing: 0.08em; }
 
 .section-rule { display: flex; align-items: center; gap: 16px; margin-bottom: 44px; }
-.section-rule-line { flex: 1; height: 1px; background: rgba(26,58,42,0.12); }
-.section-rule-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-light); white-space: nowrap; }
+.section-rule-line { flex: 1; height: 1px; background: rgba(26,58,42,0.16); }
+.section-rule-label {
+  font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--text-dark);            /* was --text-light, which vanished into the cream */
+  white-space: nowrap;
+}
 
 .thesis-feature { display: grid; grid-template-columns: 1fr 480px; margin-bottom: 72px; border: 1px solid rgba(26,58,42,0.12); }
 .thesis-body { padding: 40px 36px; border-right: 1px solid rgba(26,58,42,0.12); }
@@ -436,6 +441,20 @@ nav {
   box-shadow: 0 4px 20px rgba(0,0,0,0.12);
   padding: 0 24px;
 }
+/* Full-bleed cover videos overshoot their box by 1px on every side so no
+   hairline of the panel background behind them can show through at the edges.
+   Both parents (.home-slide, .researcher-hero) clip with overflow: hidden, so
+   nothing spills. */
+.home-video, .researcher-hero-video {
+  inset: -1px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+}
+
+/* Alternate wording for the panel-advance cue; swapped in under 900px,
+   where wheel-driven panel advance is unavailable. */
+.cue-tap { display: none; }
+
 #music-fixed-btn.playing {
   background: rgba(26,58,42,0.88);
   color: #f5f0e8;
@@ -472,6 +491,11 @@ nav {
   /* Nothing may push the layout sideways */
   img, video, iframe { max-width: 100%; }
 
+  /* Wheel-driven panel advance needs a wheel, which touch never fires, so the
+     cue promises something scrolling cannot deliver here. Tapping it still works. */
+  .cue-full { display: none; }
+  .cue-tap { display: inline; }
+
   /* ── NAV ── */
   nav { padding: 14px 22px; gap: 16px; }
   .nav-logo { font-size: 1rem; }
@@ -495,7 +519,6 @@ nav {
     flex-direction: column; align-items: flex-start; gap: 10px;
     padding: 14px 24px 20px; margin: 0 -24px;
   }
-  .home-footer-links { flex-wrap: wrap; gap: 10px 18px; }
 
   /* ── HEROES (panels 1–3) ──
      Height becomes a floor rather than a fixed box so a headline that wraps
@@ -522,13 +545,12 @@ nav {
   .cred-divider { height: 1px; }                          /* was a vertical rule */
   .cred-number { font-size: 42px; }
 
-  .section-rule { margin-bottom: 32px; gap: 12px; }
-  .section-rule-label { font-size: 11px; letter-spacing: 0.14em; white-space: normal; text-align: center; }
+  .section-rule { margin-bottom: 36px; gap: 12px; }
+  .section-rule-label { font-size: 12px; letter-spacing: 0.16em; white-space: normal; text-align: center; }
 
   .thesis-feature { grid-template-columns: 1fr; margin-bottom: 48px; }
   .thesis-aside { order: -1; }
   .thesis-body { order: 1; border-right: none; padding: 28px 22px; }
-  .thesis-aside img { height: 260px !important; width: 100% !important; }
   /* meta row: "46 pages | presented at | recognized by" — wrap, drop the 1px rules */
   .thesis-body > div:nth-of-type(2) { flex-wrap: wrap !important; gap: 16px !important; }
   .thesis-body > div:nth-of-type(2) > div { flex: 1 1 100% !important; }
@@ -542,18 +564,45 @@ nav {
   .role-block.flip { direction: ltr !important; }
   .role-block--narrow { grid-template-columns: 1fr !important; }
   .role-block > a,
-  .role-block > div.role-img { order: -1; height: 220px !important; min-height: 220px !important; }
-  /* direct children only — the album-art thumbnails further down are nested
-     inside a .role-block and must keep their natural height */
-  .role-block > img { height: 220px !important; min-height: 220px !important; width: 100% !important; }
-  .role-block > a > img { height: 100% !important; min-height: 0 !important; }
+  .role-block > div.role-img { order: -1; }
+  .role-block > div.role-img { height: 220px !important; min-height: 220px !important; }
+  /* Images keep their own aspect ratio here. A fixed-height full-width box is
+     roughly 1.7:1 on a phone, and the inline `object-fit: cover` then crops every
+     portrait source down to a strip. Letting height follow the image means nothing
+     is ever cropped; max-height is only a runaway guard for unusually tall art.
+     Direct children only — the album-art thumbnails nested further down inside a
+     .role-block already size themselves correctly. */
+  .role-block > img,
+  .role-block > a,
+  .role-block > a > img,
+  .thesis-aside img,
+  #section-therewillbe img {
+    height: auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    max-height: 72svh;
+    object-fit: contain !important;
+  }
   .role-text { order: 1; padding: 28px 22px; }
   .role-desc { font-size: 14px; line-height: 1.75; }
 
   .paper-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
 
   .page-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .page-footer-links { flex-wrap: wrap; gap: 10px 18px; }
+  /* LinkedIn / Music Instagram / email on a single line. Type and gaps are fluid
+     so the row still fits at 375px without wrapping or overflowing. */
+  .page-footer-links, .home-footer-links {
+    flex-wrap: nowrap !important;
+    gap: 3vw !important;
+    font-size: clamp(8px, 2.45vw, 11px);
+    max-width: 100%;
+  }
+  .page-footer-links > *, .home-footer-links > * {
+    font-size: inherit !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .page-footer-links svg, .home-footer-links svg { width: 11px; height: 11px; }
 
   /* ── PANEL 2 · LEADERSHIP & SUPPORT ── */
   .people-fade:not(.section-rule) { margin: 0 -24px 48px !important; padding: 40px 24px !important; }
@@ -564,12 +613,36 @@ nav {
   /* Camp Tawonga — unstick the wheel-driven sequence (see JS guard) and let
      the video and both role blocks sit in normal document flow. */
   #tawonga-outer { height: auto !important; }
-  #tawonga-outer > div { position: static !important; display: block !important; height: auto !important; }
-  #tawonga-vid { height: 240px !important; width: 100% !important; opacity: 1 !important; }
+  #tawonga-outer > div {
+    position: static !important;
+    display: block !important;
+    height: auto !important;
+    background: var(--dark-green) !important;   /* was a flat #1a1a1a grey */
+    padding-bottom: 28px;
+  }
+  #tawonga-vid {
+    height: 200px !important; width: 100% !important;
+    opacity: 1 !important; display: block;
+    border-bottom: 1px solid rgba(245,240,232,0.16);
+  }
   #tawonga-outer > div > div:nth-of-type(1) { display: none !important; }   /* video gradient */
-  #tawonga-block-1, #tawonga-block-2 { opacity: 1 !important; padding: 24px !important; }
+  #tawonga-block-1, #tawonga-block-2 { opacity: 1 !important; padding: 24px 18px 0 !important; }
+  /* Each role becomes a bordered card so it separates from the dark backdrop
+     instead of reading as grey-on-grey. */
   #tawonga-block-1 > div > div,
-  #tawonga-block-2 > div > div { backdrop-filter: none !important; padding: 0 !important; }
+  #tawonga-block-2 > div > div {
+    background: rgba(0,0,0,0.32) !important;
+    backdrop-filter: none !important;
+    border: 1px solid rgba(245,240,232,0.16) !important;
+    padding: 0 !important;
+  }
+  #tawonga-block-1 .role-block > img,
+  #tawonga-block-2 .role-block > img {
+    background: rgba(0,0,0,0.35);
+    border-bottom: 1px solid rgba(245,240,232,0.16);
+  }
+  #tawonga-block-1 .role-text,
+  #tawonga-block-2 .role-text { padding: 24px 18px !important; }
   #tawonga-outer > div > div:nth-of-type(4),
   #tawonga-outer > div > div:nth-of-type(5) { display: none !important; }   /* hairline + scroll cue */
 
@@ -578,9 +651,20 @@ nav {
   #music-fixed-btn { width: calc(100% - 32px); max-width: 420px; height: 64px; padding: 0 16px; }
   #section-sbiff > div:nth-of-type(2) { grid-template-columns: 1fr !important; gap: 8px !important; }
   #section-therewillbe { grid-template-columns: 1fr !important; }
-  #section-therewillbe img { height: 240px !important; min-height: 240px !important; }
   #section-therewillbe .role-text > div:nth-of-type(4) { grid-template-columns: 1fr !important; gap: 20px !important; }
   #section-therewillbe .role-text > div:nth-of-type(4) > div:nth-of-type(2) { display: none !important; }
+  /* "Under the Influence" episode tiles: the show wordmark sits at the left edge
+     of each graphic, so centre-cropping cut it in half. A shared square ratio
+     keeps the row of three even, and a left-anchored crop always keeps the
+     wordmark in frame. */
+  .broadcast-section .role-text a > img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover !important;
+    object-position: left center !important;
+  }
   .track-transition-inner-pad { padding: 48px 0; }
   .musician-layout { grid-template-columns: 1fr; gap: 40px; }
 }
@@ -601,7 +685,6 @@ nav {
   .home-inner { padding: 0 18px; }
   .home-headline { font-size: clamp(1.75rem, 7.6vw, 2.6rem); }
   .home-footer-bar { padding: 12px 18px 18px; margin: 0 -18px; }
-  .home-footer-links a, .home-footer-links span { font-size: 10px; }
 
   .researcher-hero-headline { font-size: clamp(26px, 8vw, 36px); }
   .researcher-hero-kicker, .researcher-hero-kicker-minor { font-size: 11px; }
@@ -611,7 +694,9 @@ nav {
   .thesis-body { padding: 24px 18px; }
   .people-fade:not(.section-rule) { margin: 0 -18px 40px !important; padding: 32px 18px !important; }
   .people-fade:not(.section-rule) > div > div:first-child { font-size: 3.4rem !important; margin-top: 0 !important; }
-  #tawonga-block-1, #tawonga-block-2 { padding: 18px !important; }
+  #tawonga-block-1, #tawonga-block-2 { padding: 18px 14px 0 !important; }
+  #tawonga-block-1 .role-text,
+  #tawonga-block-2 .role-text { padding: 20px 15px !important; }
 
   #music-listen-btn { height: 60px !important; font-size: 0.68rem !important; }
   #music-fixed-btn { width: calc(100% - 24px); height: 60px; font-size: 0.68rem; }
@@ -873,7 +958,7 @@ nav {
         </div><!-- end rp-inner -->
 
         <div style="text-align:center;padding:28px 48px 0;">
-          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(2)">Click or scroll to continue &nbsp;&#8250;</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(2)"><span class="cue-full">Click or scroll to continue</span><span class="cue-tap">Tap to continue</span> &nbsp;&#8250;</span>
         </div>
         <div style="border-top:1px solid rgba(26,58,42,0.12);padding:28px 48px;margin-top:28px;">
           <div class="page-footer" style="border-top:none;padding-top:0;">
@@ -1027,17 +1112,27 @@ nav {
             let cooldown = false;
             const COOLDOWN_MS = 800;
 
-            // ── MOBILE GUARD ──────────────────────────────────────────────
+            // ── LAYOUT MODE ───────────────────────────────────────────────
             // This sequence is driven entirely by `wheel` events, which touch
-            // devices never fire. Left running on a phone it would keep both
-            // blocks at opacity 0 forever and the Tawonga content would be
-            // invisible. Below 900px the CSS un-sticks this section and lays
-            // both blocks out in normal flow, so just reveal them and bail.
-            if (window.matchMedia('(max-width: 900px)').matches) {
-              block1.style.opacity = '1';
-              block2.style.opacity = '1';
-              return;
+            // devices never fire, and below 900px the CSS un-sticks the section so
+            // both blocks sit in normal flow. The breakpoint is re-checked on every
+            // event rather than once at load, so resizing across 900px can never
+            // leave the scroll lock armed over the mobile layout.
+            const mobileMQ = window.matchMedia('(max-width: 900px)');
+
+            function applyLayoutMode() {
+              state = 0;
+              cooldown = false;
+              panel.style.overflow = '';        // release any lock still in effect
+              if (mobileMQ.matches) {
+                block1.style.opacity = '1';     // both visible, no sequencing
+                block2.style.opacity = '1';
+              } else {
+                setBlocks(0);
+              }
             }
+            if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', applyLayoutMode);
+            else mobileMQ.addListener(applyLayoutMode);   // Safari < 14
 
             function setBlocks(s) {
               block1.style.opacity = s === 1 ? '1' : '0';
@@ -1049,7 +1144,7 @@ nav {
               const snapPos = panel.scrollTop;
               panel.style.overflow = 'hidden';
               setTimeout(() => {
-                panel.style.overflow = 'auto';
+                panel.style.overflow = '';
                 panel.scrollTop = snapPos;
                 cooldown = false;
               }, ms);
@@ -1086,7 +1181,7 @@ nav {
                 const exitPos = sectionTop - 10;
                 panel.style.overflow = 'hidden';
                 setTimeout(() => {
-                  panel.style.overflow = 'auto';
+                  panel.style.overflow = '';
                   panel.scrollTop = exitPos;
                   cooldown = false;
                 }, 900);
@@ -1103,6 +1198,7 @@ nav {
 
             // Use wheel events for section control so we can block input during cooldown
             panel.addEventListener('wheel', (e) => {
+              if (mobileMQ.matches) return;
               const sectionTop = outer.offsetTop;
               const sectionBottom = sectionTop + outer.offsetHeight;
               const scrolled = panel.scrollTop;
@@ -1119,6 +1215,7 @@ nav {
 
             // Still use scroll for entry/exit detection
             panel.addEventListener('scroll', () => {
+              if (mobileMQ.matches) return;
               const current = panel.scrollTop;
               const sectionTop = outer.offsetTop;
               const sectionBottom = sectionTop + outer.offsetHeight;
@@ -1128,7 +1225,7 @@ nav {
               lastScroll = current;
             });
 
-            setBlocks(0);
+            applyLayoutMode();
           })();
         </script>
         <script>
@@ -1209,7 +1306,7 @@ nav {
 
         <!-- Footer -->
         <div style="text-align:center;padding:28px 48px 0;background:var(--cream);">
-          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(3)">Click or scroll to continue &nbsp;&#8250;</span>
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-light);cursor:pointer;" onclick="goTo(3)"><span class="cue-full">Click or scroll to continue</span><span class="cue-tap">Tap to continue</span> &nbsp;&#8250;</span>
         </div>
         <div style="background:var(--cream);border-top:1px solid rgba(26,58,42,0.12);padding:28px 48px;margin-top:28px;">
           <div class="page-footer" style="border-top:none;padding-top:0;">
@@ -1839,17 +1936,23 @@ nav {
         if (hero) hero.style.opacity = '1';
       }, 50);
     }
-    // Lazy-load videos in the panel being navigated to (exclude tawonga-vid, handled by IntersectionObserver)
+    // Start the videos in the panel being navigated to (tawonga-vid is handled
+    // by its own IntersectionObserver), loading them first if they're cold.
     const panel = document.querySelectorAll('.slide-panel')[i];
     if (panel) {
       panel.querySelectorAll('video').forEach(v => {
         if (v.id === 'tawonga-vid') return;
-        if (v.preload === 'none' || v.readyState === 0) {
-          v.load();
-          v.play().catch(() => {});
-        }
+        if (v.readyState === 0) v.load();
+        v.play().catch(() => {});
       });
     }
+    // Stop videos in the panels we just left so they release bandwidth and CPU.
+    document.querySelectorAll('.slide-panel').forEach((pnl, idx) => {
+      if (idx === i) return;
+      pnl.querySelectorAll('video').forEach(v => {
+        if (v.id !== 'tawonga-vid' && !v.paused) v.pause();
+      });
+    });
   }
 
   function goToPanel(i) {
@@ -1972,16 +2075,47 @@ nav {
       setTimeout(() => { wheelCooldown = false; }, 800);
     }
   }, { passive: true });
+  // ── VIDEO LOADING ─────────────────────────────────────────────────────
+  // play() forces a download regardless of preload="none", so playing every
+  // video on load meant all five competed for bandwidth on a first visit and
+  // the suspend/pause handlers fought the browser whenever it tried to back
+  // off. Playback is now pinned to the panel the visitor is actually looking
+  // at; goTo() starts what it needs and pauses the rest.
+  const panelList = () => document.querySelectorAll('.slide-panel');
+  function panelIndexOf(el) {
+    return Array.prototype.indexOf.call(panelList(), el.closest('.slide-panel'));
+  }
+
   window.addEventListener('load', () => {
-    document.querySelectorAll('video').forEach(v => {
-      if (v.id !== 'tawonga-vid') v.play().catch(() => {});
-    });
-  });
-  document.querySelectorAll('video').forEach(v => {
-    if (v.id !== 'tawonga-vid') {
-      v.addEventListener('suspend', () => v.play().catch(() => {}));
-      v.addEventListener('pause', () => v.play().catch(() => {}));
+    const active = panelList()[currentPanel];
+    if (active) {
+      active.querySelectorAll('video').forEach(v => {
+        if (v.id !== 'tawonga-vid') v.play().catch(() => {});
+      });
     }
+    // Once the first panel is up and settled, quietly fetch the other panels'
+    // videos in the background so switching panels isn't a cold start. load()
+    // without play() downloads without competing for decode time.
+    setTimeout(() => {
+      panelList().forEach((pnl, idx) => {
+        if (idx === currentPanel) return;
+        pnl.querySelectorAll('video').forEach(v => {
+          if (v.id === 'tawonga-vid') return;
+          if (v.readyState === 0) { v.preload = 'auto'; v.load(); }
+        });
+      });
+    }, 3000);
+  });
+
+  document.querySelectorAll('video').forEach(v => {
+    if (v.id === 'tawonga-vid') return;
+    // Browsers pause background video to save power. Resume only when this
+    // video sits in the panel currently on screen.
+    const resumeIfActive = () => {
+      if (panelIndexOf(v) === currentPanel) v.play().catch(() => {});
+    };
+    v.addEventListener('suspend', resumeIfActive);
+    v.addEventListener('pause', resumeIfActive);
   });
 
   // Only observe inside the researcher slide panel, never touch the home panel
